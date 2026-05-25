@@ -182,11 +182,6 @@
             <a href="{{ route('admin.reports.index') }}" class="sidebar-link {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">
                 <i class="fas fa-file-invoice-dollar"></i> Laporan
             </a>
-            
-            <p class="text-uppercase text-muted small fw-bold px-4 mt-4 mb-2" style="font-size: 0.7rem; letter-spacing: 1px;">Situs</p>
-            <a href="{{ route('home') }}?view=user" target="_blank" class="sidebar-link">
-                <i class="fas fa-external-link-alt"></i> Lihat Website
-            </a>
         </div>
 
         <div class="sidebar-footer">

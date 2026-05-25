@@ -454,9 +454,6 @@
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end border-0 rounded-4 mt-3 dropdown-menu-custom">
-                            @if(auth()->user()->isAdmin())
-                                <li><a class="dropdown-item dropdown-item-custom fw-bold text-warning" href="{{ route('home') }}?view=admin"><i class="fas fa-user-shield me-2 text-warning"></i> Admin Panel</a></li>
-                            @endif
                             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('profile.edit') }}"><i class="fas fa-user-cog me-2 text-muted"></i> Pengaturan Profil</a></li>
                             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('orders.index') }}"><i class="fas fa-box me-2 text-muted"></i> Status Pesanan</a></li>
                             <li><hr class="dropdown-divider my-1 opacity-50"></li>
