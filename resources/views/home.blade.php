@@ -415,7 +415,6 @@
         border-color: transparent;
         box-shadow: none;
     }
-    }
 
     /* --- MOBILE RESPONSIVE OPTIMIZATIONS --- */
     @media (max-width: 767.98px) {
@@ -636,7 +635,7 @@
                         <h2 class="accordion-header">
                             <button class="accordion-button py-4 px-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
                                 <div class="d-flex align-items-center">
-                                    <div class="bg-success-subtle rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                    <div class="bg-success-subtle rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 40px; height: 40px;">
                                         <i class="fas fa-leaf text-success"></i>
                                     </div>
                                     Apakah produk ini menggunakan bahan pengawet?
@@ -654,7 +653,7 @@
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed py-4 px-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
                                 <div class="d-flex align-items-center">
-                                    <div class="bg-primary-subtle rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                    <div class="bg-primary-subtle rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 40px; height: 40px;">
                                         <i class="fas fa-shipping-fast text-primary"></i>
                                     </div>
                                     Bagaimana prosedur pengirimannya?
@@ -672,7 +671,7 @@
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed py-4 px-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
                                 <div class="d-flex align-items-center">
-                                    <div class="bg-danger-subtle rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                    <div class="bg-danger-subtle rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 40px; height: 40px;">
                                         <i class="fas fa-fire-burner text-danger"></i>
                                     </div>
                                     Bagaimana cara penyajian yang direkomendasikan?
