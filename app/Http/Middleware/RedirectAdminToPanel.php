@@ -21,8 +21,8 @@ class RedirectAdminToPanel
             $viewMode = 'user';
         }
 
-        // 3. Clear view mode if navigating to admin dashboard/routes
-        if ($request->is('admin') || $request->is('admin/*')) {
+        // 3. Clear view mode if navigating to admin dashboard/routes (excluding preview-site)
+        if (($request->is('admin') || $request->is('admin/*')) && !$request->is('admin/preview-site')) {
             session()->forget('admin_view_mode');
             Cookie::queue(Cookie::forget('admin_view_mode'));
             $viewMode = null;

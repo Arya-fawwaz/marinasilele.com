@@ -31,4 +31,14 @@ class DashboardController extends Controller
         // Kirim data ringkasan ke halaman view dashboard admin
         return view('admin.dashboard', compact('totalOrders', 'totalRevenue', 'totalProducts', 'totalUsers'));
     }
+
+    /**
+     * Set preview mode and redirect to homepage.
+     */
+    public function previewSite()
+    {
+        session(['admin_view_mode' => 'user']);
+        \Illuminate\Support\Facades\Cookie::queue('admin_view_mode', 'user', 60);
+        return redirect()->route('home');
+    }
 }

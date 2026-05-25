@@ -57,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
 // ==================== ADMIN PANEL ====================
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/preview-site', [DashboardController::class, 'previewSite'])->name('preview-site');
     Route::resource('products', AdminProductController::class);
     Route::resource('orders', AdminOrderController::class);
     Route::patch('/orders/{order}/payment-status', [AdminOrderController::class, 'updatePaymentStatus'])->name('orders.payment-status');
