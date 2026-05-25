@@ -5,19 +5,21 @@ const { execSync } = require('child_process');
 const destPath = path.join(__dirname, 'public', 'storage');
 const srcPath = path.join(__dirname, 'storage', 'app', 'public');
 
-const publicPath = path.join(__dirname, 'public');
-console.log('__dirname:', __dirname);
-console.log('public exists:', fs.existsSync(publicPath));
-if (fs.existsSync(publicPath)) {
-    const stats = fs.statSync(publicPath);
-    console.log('public isDirectory:', stats.isDirectory());
-    console.log('public isFile:', stats.isFile());
-    console.log('public isSymbolicLink:', fs.lstatSync(publicPath).isSymbolicLink());
+const isVercel = process.env.VERCEL === '1';
+
+if (isVercel) {
+    console.log('Running on Vercel. Cleaning up public/storage...');
+    try {
+        fs.rmSync(destPath, { recursive: true, force: true });
+    } catch (e) {
+        console.log('Error cleaning public/storage:', e.message);
+    }
 }
 
 let isSymlink = false;
 try {
-    if (fs.existsSync(destPath) && fs.lstatSync(destPath).isSymbolicLink()) {
+    const stat = fs.lstatSync(destPath);
+    if (stat.isSymbolicLink()) {
         isSymlink = true;
     }
 } catch (e) {}
