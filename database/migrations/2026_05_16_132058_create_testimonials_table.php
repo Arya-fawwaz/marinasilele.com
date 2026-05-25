@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('testimonials', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('product_id')->constrained();
+            $table->foreignId('product_id')->nullable()->constrained();
             $table->integer('rating')->unsigned();
             $table->text('comment');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
