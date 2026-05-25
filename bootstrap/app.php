@@ -12,12 +12,12 @@ return Application::configure(basePath: dirname(__DIR__))
     )
 
     ->withMiddleware(function (Middleware $middleware) {
-    // Membuka gerbang khusus untuk Midtrans tanpa dicegat token CSRF
-    $middleware->validateCsrfTokens(except: [
-        '/midtrans/notification'
-    ]);
-})
-    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->trustProxies(at: '*');
+
+        $middleware->validateCsrfTokens(except: [
+            '/midtrans/notification'
+        ]);
+
         $middleware->alias([
             'admin' => \App\Http\Middleware\CheckAdmin::class,
         ]);
