@@ -29,6 +29,23 @@ class RedirectAdminToPanel
         }
 
         if (auth()->check() && auth()->user()->isAdmin()) {
+            // Check if the request is external (empty or different referer host)
+            $referer = $request->header('referer');
+            $isInternal = false;
+            if ($referer) {
+                $refererHost = parse_url($referer, PHP_URL_HOST);
+                if ($refererHost === $request->getHost()) {
+                    $isInternal = true;
+                }
+            }
+
+            // If it is an external/direct entry, clear the view mode to force admin panel redirect
+            if (!$isInternal && !$request->is('admin') && !$request->is('admin/*') && !$request->is('logout')) {
+                session()->forget('admin_view_mode');
+                Cookie::queue(Cookie::forget('admin_view_mode'));
+                $viewMode = null;
+            }
+
             if ($viewMode !== 'user') {
                 if (!$request->is('admin') && !$request->is('admin/*') && !$request->is('logout')) {
                     return redirect()->route('admin.dashboard');

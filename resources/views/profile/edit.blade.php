@@ -7,7 +7,14 @@
     <div class="row justify-content-center">
         <div class="col-lg-10">
             
-            <h2 class="fw-black text-dark mb-4"><i class="fas fa-user-cog text-danger me-2"></i> Pengaturan <span class="text-danger">Profil</span></h2>
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+                <h2 class="fw-black text-dark mb-0"><i class="fas fa-user-cog text-danger me-2"></i> Pengaturan <span class="text-danger">Profil</span></h2>
+                @if(auth()->user()->isAdmin())
+                    <a href="{{ route('admin.dashboard') }}" class="btn btn-dark rounded-pill px-4 py-2 fw-bold shadow-sm transition-all">
+                        <i class="fas fa-user-shield me-2 text-danger"></i> Admin Panel
+                    </a>
+                @endif
+            </div>
 
             @if(session('success'))
                 <div class="alert alert-success border-0 shadow-sm rounded-4 p-3 mb-4 d-flex align-items-center">
