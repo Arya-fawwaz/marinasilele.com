@@ -10,6 +10,10 @@ class HomeController extends Controller
 {
     public function index()
     {
+        if (auth()->check() && auth()->user()->isAdmin()) {
+            return redirect()->route('admin.dashboard');
+        }
+
         // 1. Ambil produk unggulan (3 produk terbaru/terlaris)
         $featuredProducts = Product::latest()->take(3)->get();
         
