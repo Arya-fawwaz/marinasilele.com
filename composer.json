@@ -45,8 +45,6 @@
         ],
         "vercel": [
             "@php artisan package:discover",
-            "rm -rf public/storage",
-            "cp -r storage/app/public public/storage",
             "npm install",
             "npm run build"
         ],
