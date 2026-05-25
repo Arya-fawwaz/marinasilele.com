@@ -325,10 +325,106 @@
                 height: 32px;
             }
         }
+
+        /* --- MOBILE BOTTOM NAVIGATION BAR --- */
+        .mobile-bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1040;
+            padding-bottom: safe;
+            transition: var(--transition-smooth);
+        }
+
+        .mobile-bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            height: 100%;
+            text-decoration: none;
+            color: #8E8E93;
+            font-size: 0.65rem;
+            font-weight: 700;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .mobile-bottom-nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+            transition: var(--transition-smooth);
+        }
+
+        .mobile-bottom-nav-item.active {
+            color: var(--brand-primary);
+        }
+
+        .mobile-bottom-nav-item.active i {
+            color: var(--brand-primary);
+        }
+
+        .mobile-cart-badge {
+            position: absolute;
+            top: 4px;
+            right: 25%;
+            font-size: 0.6rem;
+            padding: 0.2em 0.5em;
+            border-radius: 50rem;
+            background-color: var(--brand-primary);
+            color: white;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 991.98px) {
+            body {
+                padding-bottom: 60px;
+            }
+            .navbar-collapse {
+                background: white;
+                border-radius: 15px;
+                padding: 1rem;
+                box-shadow: var(--shadow-smooth);
+                margin-top: 0.5rem;
+            }
+            .container {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .row.g-4 {
+                --bs-gutter-y: 1rem;
+                --bs-gutter-x: 1rem;
+            }
+            .card {
+                border-radius: 16px !important;
+            }
+        }
     </style>
     @stack('styles')
 </head>
 <body>
+
+    @if(auth()->check() && auth()->user()->isAdmin() && session('admin_view_mode') === 'user')
+        <div class="bg-warning text-dark text-center py-2 px-3 fw-bold d-flex justify-content-center align-items-center gap-2 border-bottom border-warning shadow-sm position-relative d-print-none" style="z-index: 1050; font-size: 0.9rem;">
+            <i class="fas fa-user-shield"></i>
+            <span>Mode Administrator: Anda sedang melihat tampilan website pengguna.</span>
+            <a href="{{ route('home') }}?view=admin" class="btn btn-dark btn-sm rounded-pill px-3 py-1 fw-bold text-white border-0 transition-all hover-scale ms-2" style="background-color: #1a1a1a;">
+                Kembali ke Admin Panel <i class="fas fa-arrow-right ms-1"></i>
+            </a>
+        </div>
+    @endif
 
     <nav class="navbar navbar-expand-lg navbar-custom sticky-top d-print-none">
         <div class="container">
@@ -460,6 +556,46 @@
             </div>
         </div>
     </footer>
+
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <div class="mobile-bottom-nav d-lg-none d-print-none">
+        <a href="{{ route('home') }}" class="mobile-bottom-nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
+            <i class="fas fa-home"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="{{ route('products.index') }}" class="mobile-bottom-nav-item {{ request()->routeIs('products.*') ? 'active' : '' }}">
+            <i class="fas fa-fish"></i>
+            <span>Produk</span>
+        </a>
+        <a href="{{ route('cart.index') }}" class="mobile-bottom-nav-item {{ request()->routeIs('cart.index') ? 'active' : '' }}">
+            <i class="fas fa-shopping-bag"></i>
+            @php
+                $mobileCartCount = 0;
+                if(auth()->check()) {
+                    $mobileCartCount = \App\Models\Cart::where('user_id', auth()->id())->count();
+                }
+            @endphp
+            @if($mobileCartCount > 0)
+                <span class="mobile-cart-badge">{{ $mobileCartCount }}</span>
+            @endif
+            <span>Keranjang</span>
+        </a>
+        <a href="{{ route('orders.index') }}" class="mobile-bottom-nav-item {{ request()->routeIs('orders.*') ? 'active' : '' }}">
+            <i class="fas fa-receipt"></i>
+            <span>Pesanan</span>
+        </a>
+        @auth
+            <a href="{{ route('profile.edit') }}" class="mobile-bottom-nav-item {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
+                <i class="fas fa-user-circle"></i>
+                <span>Profil</span>
+            </a>
+        @else
+            <a href="{{ route('login') }}" class="mobile-bottom-nav-item {{ request()->routeIs('login') || request()->routeIs('register') ? 'active' : '' }}">
+                <i class="fas fa-user-circle"></i>
+                <span>Masuk</span>
+            </a>
+        @endauth
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     @stack('scripts')
