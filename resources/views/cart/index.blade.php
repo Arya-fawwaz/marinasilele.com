@@ -48,11 +48,7 @@
                                         <td class="ps-4 py-4">
                                             <div class="d-flex align-items-center gap-3">
                                                 <div class="bg-light rounded-3 d-flex align-items-center justify-content-center border shadow-sm flex-shrink-0" style="width: 65px; height: 65px; overflow: hidden;">
-                                                    @if($item->product->image)
-                                                        <img src="{{ asset('storage/'.$item->product->image) }}" alt="{{ $item->product->name }}" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
-                                                    @else
-                                                        <i class="fas fa-fish text-muted opacity-50 fs-4"></i>
-                                                    @endif
+                                                    <img src="{{ $item->product->image_url }}" alt="{{ $item->product->name }}" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
                                                 </div>
                                                 <div>
                                                     <h6 class="fw-bold text-dark mb-1">{{ Str::limit($item->product->name, 35) }}</h6>

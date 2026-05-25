@@ -59,10 +59,9 @@
                             {{-- Image Wrapper --}}
                             <a href="{{ route('products.show', $product->id) }}" class="product-img-wrapper">
                                 @php
-                                    $productImage = $product->image ? asset('storage/'.$product->image) : null;
-                                    $fallbackImage = 'https://via.placeholder.com/400x300?text=No+Image';
+                                    $productImage = $product->image_url;
                                 @endphp
-                                <img src="{{ $productImage ?? $fallbackImage }}" 
+                                <img src="{{ $productImage }}" 
                                      class="card-img-top" alt="{{ $product->name }}">
                             </a>
                             

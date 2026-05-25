@@ -57,11 +57,17 @@
                         <h5 class="fw-bold mb-4 text-primary"><i class="fas fa-image me-2"></i> Foto Produk</h5>
                         
                         <div class="text-center mb-3">
-                            <img id="imagePreview" src="{{ $product->image ? asset('storage/'.$product->image) : 'https://via.placeholder.com/300x300?text=Preview+Gambar' }}" class="img-fluid rounded-3 object-fit-cover shadow-sm" style="height: 250px; width: 100%;" alt="Preview">
+                            <img id="imagePreview" src="{{ $product->image_url }}" class="img-fluid rounded-3 object-fit-cover shadow-sm" style="height: 250px; width: 100%;" alt="Preview">
                         </div>
                         <div class="mb-3">
+                            <label class="form-label fw-semibold text-secondary">Upload File Gambar Baru</label>
                             <input type="file" name="image" id="imageInput" class="form-control" accept="image/*" onchange="previewImage(event)">
-                            <small class="text-warning mt-2 d-block"><i class="fas fa-info-circle"></i> Kosongkan jika tidak ingin mengubah gambar.</small>
+                            <small class="text-warning mt-1 d-block"><i class="fas fa-info-circle"></i> Kosongkan jika tidak ingin mengubah gambar.</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold text-secondary">Atau URL Gambar Baru (Hosting Vercel)</label>
+                            <input type="text" name="image_url" id="imageUrlInput" class="form-control" placeholder="https://example.com/gambar.jpg" value="{{ (isset($product->image) && (str_starts_with($product->image, 'http://') || str_starts_with($product->image, 'https://'))) ? $product->image : '' }}" oninput="previewImageUrl(this.value)">
+                            <small class="text-muted mt-1 d-block">Gunakan link eksternal jika mengunggah ke Vercel.</small>
                         </div>
                     </div>
                 </div>
@@ -106,9 +112,20 @@
         reader.onload = function() {
             var output = document.getElementById('imagePreview');
             output.src = reader.result;
+            document.getElementById('imageUrlInput').value = '';
         }
         if(event.target.files[0]) {
             reader.readAsDataURL(event.target.files[0]);
+        }
+    }
+
+    function previewImageUrl(url) {
+        var output = document.getElementById('imagePreview');
+        if (url) {
+            output.src = url;
+            document.getElementById('imageInput').value = '';
+        } else {
+            output.src = '{{ $product->image_url }}';
         }
     }
 </script>

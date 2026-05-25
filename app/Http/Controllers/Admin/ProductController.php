@@ -31,16 +31,19 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:0',
             'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|max:2048',
+            'image_url' => 'nullable|url|max:2048',
             'status' => 'required|in:active,inactive',
         ]);
 
-        $data = $request->all();
+        $data = $request->except(['image', 'image_url']);
         $data['slug'] = Str::slug($request->name) . '-' . uniqid();
 
         if ($request->hasFile('image')) {
-    $path = $request->file('image')->store('products', 'public');
-    $data['image'] = $path;
-}
+            $path = $request->file('image')->store('products', 'public');
+            $data['image'] = $path;
+        } elseif ($request->filled('image_url')) {
+            $data['image'] = $request->image_url;
+        }
         Product::create($data);
 
         return redirect()->route('admin.products.index')->with('success', 'Produk berhasil ditambahkan.');
@@ -61,13 +64,16 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:0',
             'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|max:2048',
+            'image_url' => 'nullable|url|max:2048',
             'status' => 'required|in:active,inactive',
         ]);
 
-        $data = $request->all();
+        $data = $request->except(['image', 'image_url']);
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('products', 'public');
             $data['image'] = $path;
+        } elseif ($request->filled('image_url')) {
+            $data['image'] = $request->image_url;
         }
 
         $product->update($data);

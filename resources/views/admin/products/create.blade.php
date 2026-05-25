@@ -58,8 +58,14 @@
                             <img id="imagePreview" src="https://via.placeholder.com/300x300?text=Preview+Gambar" class="img-fluid rounded-3 object-fit-cover shadow-sm" style="height: 250px; width: 100%; border: 2px dashed #dee2e6;" alt="Preview">
                         </div>
                         <div class="mb-3">
+                            <label class="form-label fw-semibold text-secondary">Upload File Gambar</label>
                             <input type="file" name="image" id="imageInput" class="form-control" accept="image/*" onchange="previewImage(event)">
-                            <small class="text-muted mt-2 d-block">Format: JPG, PNG, JPEG. Maks: 2MB.</small>
+                            <small class="text-muted mt-1 d-block">Format: JPG, PNG, JPEG. Maks: 2MB.</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold text-secondary">Atau URL Gambar (Hosting Vercel)</label>
+                            <input type="text" name="image_url" id="imageUrlInput" class="form-control" placeholder="https://example.com/gambar.jpg" oninput="previewImageUrl(this.value)">
+                            <small class="text-muted mt-1 d-block">Gunakan link eksternal jika mengunggah ke Vercel.</small>
                         </div>
                     </div>
                 </div>
@@ -98,16 +104,28 @@
 
 @push('scripts')
 <script>
-    // Script untuk memunculkan preview gambar secara live saat file dipilih
     function previewImage(event) {
         var reader = new FileReader();
         reader.onload = function() {
             var output = document.getElementById('imagePreview');
             output.src = reader.result;
-            output.style.border = 'none'; // Hapus border dashed saat ada gambar
+            output.style.border = 'none';
+            document.getElementById('imageUrlInput').value = '';
         }
         if(event.target.files[0]) {
             reader.readAsDataURL(event.target.files[0]);
+        }
+    }
+
+    function previewImageUrl(url) {
+        var output = document.getElementById('imagePreview');
+        if (url) {
+            output.src = url;
+            output.style.border = 'none';
+            document.getElementById('imageInput').value = '';
+        } else {
+            output.src = 'https://via.placeholder.com/300x300?text=Preview+Gambar';
+            output.style.border = '2px dashed #dee2e6';
         }
     }
 </script>

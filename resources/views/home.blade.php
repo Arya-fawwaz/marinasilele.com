@@ -540,7 +540,7 @@
                     <div class="product-img-wrapper">
                         <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-3 z-index-1 rounded-pill fw-bold shadow-lg py-2 px-3">🔥 Terlaris</span>
                         <div class="price-tag">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
-                        <img src="{{ $product->image ? asset('storage/'.$product->image) : 'https://via.placeholder.com/400x400?text=No+Image' }}" alt="{{ $product->name }}">
+                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}">
                     </div>
                     <div class="card-body d-flex flex-column p-4" style="transform: translateZ(30px);">
                         <h5 class="card-title fw-bolder text-dark mb-2 fs-4">{{ $product->name }}</h5>

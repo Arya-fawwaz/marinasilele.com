@@ -43,7 +43,7 @@
                     <td>
                         <div class="d-flex align-items-center gap-3">
                             <div class="product-thumbnail shadow-sm border border-light">
-                                <img src="{{ isset($p->image) && $p->image ? asset('storage/'.$p->image) : 'https://via.placeholder.com/150?text=No+Img' }}" alt="{{ $p->name }}">
+                                <img src="{{ $p->image_url }}" alt="{{ $p->name }}">
                             </div>
                             <div>
                                 <h6 class="mb-1 fw-bold text-dark" style="font-size: 1.05rem;">{{ $p->name }}</h6>

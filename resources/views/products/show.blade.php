@@ -14,7 +14,7 @@
         <div class="row g-0">
             <div class="col-md-6 bg-light d-flex align-items-center justify-content-center p-4">
                 @php
-                    $productImage = $product->image ? asset('storage/'.$product->image) : 'https://via.placeholder.com/600x600?text=Belum+Ada+Gambar';
+                    $productImage = $product->image_url;
                 @endphp
                 <img src="{{ $productImage }}" alt="{{ $product->name }}" class="img-fluid rounded-4 shadow-sm" style="max-height: 500px; object-fit: cover; width: 100%;">
             </div>
