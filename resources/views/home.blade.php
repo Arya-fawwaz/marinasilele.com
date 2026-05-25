@@ -420,16 +420,21 @@
     /* --- MOBILE RESPONSIVE OPTIMIZATIONS --- */
     @media (max-width: 767.98px) {
         .hero-banner-wrapper {
+            margin-left: -16px;
+            margin-right: -16px;
             margin-bottom: 2.5rem;
-            padding: 0 0.5rem;
+            padding: 0;
+            width: calc(100% + 32px);
         }
         .hero-banner {
-            border-radius: var(--radius-md);
-            padding: 4px;
+            border-radius: 0;
+            padding: 0;
+            border: none;
+            box-shadow: none;
         }
         .hero-banner video {
-            aspect-ratio: 16 / 9;
-            border-radius: calc(var(--radius-md) - 2px);
+            aspect-ratio: 16 / 10;
+            border-radius: 0;
         }
         .info-section {
             padding: 1.5rem !important;

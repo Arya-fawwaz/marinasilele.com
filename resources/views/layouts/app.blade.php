@@ -416,16 +416,6 @@
 </head>
 <body>
 
-    @if(auth()->check() && auth()->user()->isAdmin() && session('admin_view_mode') === 'user')
-        <div class="bg-warning text-dark text-center py-2 px-3 fw-bold d-flex justify-content-center align-items-center gap-2 border-bottom border-warning shadow-sm position-relative d-print-none" style="z-index: 1050; font-size: 0.9rem;">
-            <i class="fas fa-user-shield"></i>
-            <span>Mode Administrator: Anda sedang melihat tampilan website pengguna.</span>
-            <a href="{{ route('home') }}?view=admin" class="btn btn-dark btn-sm rounded-pill px-3 py-1 fw-bold text-white border-0 transition-all hover-scale ms-2" style="background-color: #1a1a1a;">
-                Kembali ke Admin Panel <i class="fas fa-arrow-right ms-1"></i>
-            </a>
-        </div>
-    @endif
-
     <nav class="navbar navbar-expand-lg navbar-custom sticky-top d-print-none">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
@@ -464,6 +454,9 @@
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end border-0 rounded-4 mt-3 dropdown-menu-custom">
+                            @if(auth()->user()->isAdmin())
+                                <li><a class="dropdown-item dropdown-item-custom fw-bold text-warning" href="{{ route('home') }}?view=admin"><i class="fas fa-user-shield me-2 text-warning"></i> Admin Panel</a></li>
+                            @endif
                             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('profile.edit') }}"><i class="fas fa-user-cog me-2 text-muted"></i> Pengaturan Profil</a></li>
                             <li><a class="dropdown-item dropdown-item-custom" href="{{ route('orders.index') }}"><i class="fas fa-box me-2 text-muted"></i> Status Pesanan</a></li>
                             <li><hr class="dropdown-divider my-1 opacity-50"></li>

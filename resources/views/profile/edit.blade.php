@@ -9,6 +9,18 @@
             
             <h2 class="fw-black text-dark mb-4"><i class="fas fa-user-cog text-danger me-2"></i> Pengaturan <span class="text-danger">Profil</span></h2>
 
+            @if(auth()->user()->isAdmin())
+                <div class="alert alert-info border-0 shadow-sm rounded-4 p-3 mb-4 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-user-shield fs-4 me-3 text-info"></i>
+                        <span class="fw-medium text-dark">Mode Administrator</span>
+                    </div>
+                    <a href="{{ route('home') }}?view=admin" class="btn btn-info btn-sm rounded-pill px-4 py-2 fw-bold text-white shadow-sm" style="background-color: #0dcaf0; border: none;">
+                        Kembali ke Admin Panel <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            @endif
+
             @if(session('success'))
                 <div class="alert alert-success border-0 shadow-sm rounded-4 p-3 mb-4 d-flex align-items-center">
                     <i class="fas fa-check-circle fs-4 me-3 text-success"></i>
