@@ -74,8 +74,12 @@
                     <div class="card border-0 shadow-sm rounded-4">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <div class="bg-danger-subtle rounded-circle d-flex align-items-center justify-content-center fw-bold text-danger me-3" style="width: 45px; height: 45px; font-size: 1.2rem;">
-                                    {{ strtoupper(substr(optional($testi->user)->name ?? 'G', 0, 1)) }}
+                                <div class="bg-danger-subtle rounded-circle d-flex align-items-center justify-content-center fw-bold text-danger me-3 overflow-hidden flex-shrink-0" style="width: 45px; height: 45px; font-size: 1.2rem;">
+                                    @if(optional($testi->user)->avatar)
+                                        <img src="{{ asset($testi->user->avatar) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                                    @else
+                                        {{ strtoupper(substr(optional($testi->user)->name ?? 'G', 0, 1)) }}
+                                    @endif
                                 </div>
                                 <div>
                                     <h6 class="fw-bold text-dark mb-0">{{ optional($testi->user)->name ?? 'Pengguna Anonim' }}</h6>
