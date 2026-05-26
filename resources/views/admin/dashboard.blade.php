@@ -156,7 +156,7 @@
                 </div>
 
                 <div class="col-lg-3 col-md-6 col-6">
-                    <a href="{{ route('home') }}" target="_blank" class="text-decoration-none">
+                    <a href="{{ route('admin.preview-site') }}" class="text-decoration-none">
                         <div class="card action-card border-0 shadow-sm h-100 bg-white">
                             <div class="card-body p-4 text-center">
                                 <div class="action-icon bg-warning text-dark mx-auto mb-3 shadow-sm">
