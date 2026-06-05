@@ -3,32 +3,51 @@
   "outputDirectory": "public",
   "functions": {
     "api/*.php": {
-      "runtime": "vercel-php@0.7.4"
+      "runtime": "vercel-php@0.7.4",
+      "memory": 3008
     }
   },
   "routes": [
     {
       "src": "/build/(.*)",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      },
       "dest": "/build/$1"
     },
     {
       "src": "/storage/(.*)",
+      "headers": {
+        "cache-control": "public, max-age=86400, must-revalidate"
+      },
       "dest": "/storage/$1"
     },
     {
       "src": "/images/(.*)",
+      "headers": {
+        "cache-control": "public, max-age=86400, must-revalidate"
+      },
       "dest": "/images/$1"
     },
     {
       "src": "/uploads/(.*)",
+      "headers": {
+        "cache-control": "public, max-age=86400, must-revalidate"
+      },
       "dest": "/uploads/$1"
     },
     {
       "src": "/favicon.ico",
+      "headers": {
+        "cache-control": "public, max-age=86400, must-revalidate"
+      },
       "dest": "/favicon.ico"
     },
     {
       "src": "/robots.txt",
+      "headers": {
+        "cache-control": "public, max-age=86400, must-revalidate"
+      },
       "dest": "/robots.txt"
     },
     {
