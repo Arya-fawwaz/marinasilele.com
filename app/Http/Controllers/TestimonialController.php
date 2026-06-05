@@ -10,7 +10,10 @@ class TestimonialController extends Controller
     public function index()
     {
         // Ambil semua testimoni, urutkan dari yang terbaru
-        $testimonials = Testimonial::with('user')->latest()->get();
+        $testimonials = Testimonial::with('user:id,name,avatar')
+            ->select('id', 'user_id', 'rating', 'comment', 'created_at')
+            ->latest()
+            ->get();
         return view('testimonials.index', compact('testimonials'));
     }
 

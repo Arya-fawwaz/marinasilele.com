@@ -11,8 +11,9 @@ class ProductController extends Controller
 {
    public function index(Request $request)
     {
-        $categories = Category::all();
-        $query = Product::query();
+        $categories = Category::select('id', 'name')->get();
+        $query = Product::with('category:id,name')
+            ->select('id', 'name', 'slug', 'price', 'image', 'category_id', 'stock', 'status');
 
         if ($request->filled('category')) {
             $query->where('category_id', $request->category);
@@ -29,8 +30,12 @@ class ProductController extends Controller
     }
     public function show($id)
     {
-        $product = Product::with('category')->findOrFail($id);
-        $testimonials = Testimonial::where('product_id', $id)->where('status', 'approved')->get();
+        $product = Product::with('category:id,name')->findOrFail($id);
+        $testimonials = Testimonial::with('user:id,name,avatar')
+            ->select('id', 'user_id', 'product_id', 'rating', 'comment', 'status', 'created_at')
+            ->where('product_id', $id)
+            ->where('status', 'approved')
+            ->get();
         $averageRating = $testimonials->avg('rating');
         return view('products.show', compact('product', 'testimonials', 'averageRating'));
     }

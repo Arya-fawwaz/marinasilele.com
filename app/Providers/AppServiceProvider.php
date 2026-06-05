@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Vite;
+use Illuminate\Database\Eloquent\Model;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Force HTTPS in production (Vercel is always HTTPS)
+        if (app()->isProduction()) {
+            URL::forceScheme('https');
+        }
+
+        // Vite: use aggressive prefetch to preload all assets
+        Vite::prefetch(concurrency: 3);
+
+        // Prevent lazy loading in non-production (catch N+1 issues)
+        Model::preventLazyLoading(! app()->isProduction());
     }
 }

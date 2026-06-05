@@ -99,6 +99,9 @@ return [
             'sslmode' => env('DB_SSLMODE', 'prefer'),
             'options' => [
                 \PDO::ATTR_EMULATE_PREPARES => true,
+                \PDO::ATTR_PERSISTENT => true,
+                \PDO::ATTR_TIMEOUT => 5,
+                \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_OBJ,
             ],
         ],
 
