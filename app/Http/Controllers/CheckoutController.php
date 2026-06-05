@@ -63,8 +63,8 @@ class CheckoutController extends Controller
         // Hapus keranjang belanja karena item sudah dipesan
         Cart::where('user_id', $user->id)->delete();
 
-        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        Config::$isProduction = env('MIDTRANS_IS_PRODUCTION', false);
+        Config::$serverKey = config('services.midtrans.server_key');
+        Config::$isProduction = config('services.midtrans.is_production', false);
         Config::$isSanitized = true;
         Config::$is3ds = true;
 
@@ -112,8 +112,8 @@ class CheckoutController extends Controller
             $order->update(['status' => 'pending']);
         }
         
-        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        Config::$isProduction = env('MIDTRANS_IS_PRODUCTION', false);
+        Config::$serverKey = config('services.midtrans.server_key');
+        Config::$isProduction = config('services.midtrans.is_production', false);
         Config::$isSanitized = true;
         Config::$is3ds = true;
 
@@ -159,8 +159,8 @@ class CheckoutController extends Controller
 
     public function handleNotification(Request $request)
     {
-        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        Config::$isProduction = env('MIDTRANS_IS_PRODUCTION', false);
+        Config::$serverKey = config('services.midtrans.server_key');
+        Config::$isProduction = config('services.midtrans.is_production', false);
         try { $notif = new Notification(); } catch (\Exception $e) { return response()->json(['message' => 'Invalid'], 400); }
         
         $orderId = $notif->order_id;
