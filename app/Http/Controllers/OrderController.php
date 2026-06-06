@@ -54,7 +54,7 @@ class OrderController extends Controller
             Cart::where('user_id', $order->user_id)->delete();
         }
 
-        return back()->with('success', 'Terima kasih! Pesanan diproses dan Driver akan menagih pembayaran tunai (COD).');
+        return redirect()->route('orders.index')->with('success', 'Terima kasih! Pesanan diproses dan Driver akan menagih pembayaran tunai (COD).');
     }
 
     public function show($id)

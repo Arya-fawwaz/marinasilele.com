@@ -68,6 +68,7 @@
     },
     {
       "src": "/(.*)",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"],
       "dest": "/api/index.php"
     }
   ]
