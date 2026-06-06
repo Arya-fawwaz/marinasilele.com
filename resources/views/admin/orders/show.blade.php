@@ -257,9 +257,9 @@
             shadowSize: [41, 41]
         });
 
-        // Store location (fixed point: Metland Cibitung: -6.2494885, 107.1096282)
-        const storeLat = -6.2494885;
-        const storeLng = 107.1096282;
+        // Store location (fixed point: Metland Cibitung - Area Pasar/Ruko: -6.251667, 107.115833)
+        const storeLat = -6.251667;
+        const storeLng = 107.115833;
         const storeIcon = L.icon({
             iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
             shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
