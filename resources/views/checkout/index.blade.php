@@ -206,9 +206,10 @@
     const STORE_LAT = -6.229728;
     const STORE_LNG = 106.829898;
     
-    let map, marker;
+    let map, marker, routeLine = null;
     let currentLat = null;
     let currentLng = null;
+    let geocodeTimeout = null;
 
     document.addEventListener("DOMContentLoaded", function() {
         // Init Map
@@ -263,6 +264,28 @@
             updateLocation(e.latlng.lat, e.latlng.lng, true);
         });
 
+        // Listen for address textarea changes to automatically search on map (Forward Geocoding)
+        const addressTextarea = document.getElementById('address_textarea');
+        addressTextarea.addEventListener('input', function() {
+            if (document.querySelector('input[name="shipping_type"]:checked').value !== 'delivery') return;
+            clearTimeout(geocodeTimeout);
+            const address = this.value.trim();
+            if (address.length < 5) return;
+            
+            geocodeTimeout = setTimeout(() => {
+                geocodeAddress(address);
+            }, 1500); // 1.5s debounce to let user type
+        });
+
+        addressTextarea.addEventListener('change', function() {
+            if (document.querySelector('input[name="shipping_type"]:checked').value !== 'delivery') return;
+            clearTimeout(geocodeTimeout);
+            const address = this.value.trim();
+            if (address.length >= 5) {
+                geocodeAddress(address);
+            }
+        });
+
         // Handle shipping type change
         document.querySelectorAll('input[name="shipping_type"]').forEach(radio => {
             radio.addEventListener('change', function() {
@@ -299,6 +322,11 @@
             addressWarning.innerText = '*Wajib diisi untuk mempermudah penyajian/pengambilan.';
             addressCardTitle.innerHTML = '<i class="fas fa-store text-danger me-2"></i> Makan di Tempat / Ambil';
             
+            if (routeLine) {
+                map.removeLayer(routeLine);
+                routeLine = null;
+            }
+
             // Set shipping fee to 0
             updateShippingUI(0, 0);
         }
@@ -327,6 +355,33 @@
             },
             { enableHighAccuracy: true, timeout: 10000 }
         );
+    }
+
+    function geocodeAddress(address) {
+        const statusText = document.getElementById('map-status-text');
+        statusText.innerHTML = '<span class="text-primary"><i class="fas fa-spinner fa-spin me-1"></i> Mencari lokasi alamat...</span>';
+        
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(address)}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.length > 0) {
+                    const lat = parseFloat(data[0].lat);
+                    const lng = parseFloat(data[0].lon);
+                    
+                    statusText.innerHTML = '<span class="text-success"><i class="fas fa-check-circle me-1"></i> Lokasi ditemukan dan diperbarui!</span>';
+                    
+                    // Move customer marker to the new coordinates
+                    marker.setLatLng([lat, lng]);
+                    
+                    // Update coordinates and calculate distance & shipping (do NOT fetch address again to avoid loop)
+                    updateLocation(lat, lng, false);
+                } else {
+                    statusText.innerHTML = '<span class="text-warning"><i class="fas fa-exclamation-triangle me-1"></i> Lokasi alamat kurang spesifik/tidak ditemukan pada peta. Silakan geser pin manual.</span>';
+                }
+            })
+            .catch(err => {
+                statusText.innerHTML = '<span class="text-danger"><i class="fas fa-times-circle me-1"></i> Gagal mencari lokasi alamat.</span>';
+            });
     }
 
     function updateLocation(lat, lng, fetchAddress = false) {
@@ -371,6 +426,31 @@
         }
 
         updateShippingUI(distance, shippingFee);
+
+        // Draw line & update map bounds if delivery
+        if (document.querySelector('input[name="shipping_type"]:checked').value === 'delivery') {
+            if (routeLine) {
+                map.removeLayer(routeLine);
+            }
+
+            // Draw line connecting Store and Customer Marker
+            routeLine = L.polyline([
+                [STORE_LAT, STORE_LNG],
+                [lat, lng]
+            ], {
+                color: '#A81C1C',
+                weight: 3,
+                opacity: 0.8,
+                dashArray: '5, 10'
+            }).addTo(map);
+
+            // Fit map bounds to show both store and delivery location nicely
+            const group = new L.featureGroup([
+                L.marker([STORE_LAT, STORE_LNG]),
+                L.marker([lat, lng])
+            ]);
+            map.fitBounds(group.getBounds().pad(0.25));
+        }
     }
 
     function updateShippingUI(distance, shippingFee) {
