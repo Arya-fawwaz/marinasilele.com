@@ -36,17 +36,30 @@ class OrderController extends Controller
     {
         $request->validate([
             'status' => 'required|in:pending,processing,completed,cancelled',
-            'payment_status' => 'required|in:unpaid,paid,failed',
+            'payment_status' => 'nullable|in:unpaid,paid,failed',
         ]);
 
-        $order->update($request->only(['status', 'payment_status']));
+        $updateData = ['status' => $request->status];
 
-        // Jika payment_status menjadi paid, update payment status juga
+        if ($request->has('payment_status')) {
+            $updateData['payment_status'] = $request->payment_status;
+        } else {
+            // Set payment status dynamically based on order status if not supplied
+            if ($request->status == 'completed') {
+                $updateData['payment_status'] = 'paid';
+            } elseif ($request->status == 'cancelled') {
+                $updateData['payment_status'] = 'failed';
+            }
+        }
+
+        $order->update($updateData);
+
+        // Jika payment_status menjadi paid, update payment status juga di tabel payments jika ada
         if ($order->payment_status == 'paid' && $order->payment) {
             $order->payment->update(['status' => 'paid']);
         }
 
-        return redirect()->route('admin.orders.index')->with('success', 'Status pesanan diperbarui.');
+        return redirect()->back()->with('success', 'Status pesanan diperbarui.');
     }
 
     // Method khusus untuk mengupdate status pembayaran (bisa juga di dalam update)

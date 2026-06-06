@@ -156,7 +156,7 @@
                             <h4 class="fw-black text-success text-uppercase mb-0" style="font-weight: 900; letter-spacing: 1px;">LUNAS</h4>
                             <small class="text-success fw-semibold mt-2 d-block">Pembayaran Terverifikasi</small>
                         </div>
-                    @elseif(strtolower($order->status) == 'awaiting_confirmation')
+                    @elseif(strtolower($order->status) == 'awaiting_confirmation' || strtolower($order->status) == 'processing')
                         <div class="bg-info bg-opacity-10 p-5 rounded-4 border border-info border-opacity-25 animate-fade-in">
                             <i class="fas fa-clock text-info fa-4x mb-3 animate-pulse"></i>
                             <h4 class="fw-black text-info text-uppercase mb-0" style="font-weight: 900; letter-spacing: 1px;">KLAIM COD</h4>
@@ -178,9 +178,8 @@
                             <div class="d-flex gap-2">
                                 <select name="status" class="form-select bg-light border-light rounded-3 shadow-none focus-ring focus-ring-danger">
                                     <option value="pending" {{ strtolower($order->status) == 'pending' ? 'selected' : '' }}>Belum Bayar (Pending)</option>
-                                    <option value="success" {{ strtolower($order->status) == 'success' ? 'selected' : '' }}>Lunas (Success)</option>
-                                    <option value="completed" {{ strtolower($order->status) == 'completed' ? 'selected' : '' }}>Selesai (Completed)</option>
-                                    <option value="awaiting_confirmation" {{ strtolower($order->status) == 'awaiting_confirmation' ? 'selected' : '' }}>Klaim COD</option>
+                                    <option value="processing" {{ strtolower($order->status) == 'processing' || strtolower($order->status) == 'awaiting_confirmation' ? 'selected' : '' }}>Klaim COD (Processing)</option>
+                                    <option value="completed" {{ strtolower($order->status) == 'completed' || strtolower($order->status) == 'success' ? 'selected' : '' }}>Lunas / Selesai (Completed)</option>
                                     <option value="cancelled" {{ strtolower($order->status) == 'cancelled' ? 'selected' : '' }}>Batal (Cancelled)</option>
                                 </select>
                                 <button type="submit" class="btn btn-dark rounded-3 px-4 fw-bold shadow-sm">Save</button>
