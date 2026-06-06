@@ -14,11 +14,13 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use Illuminate\Support\Facades\Route;
 
-// ==================== HALAMAN PUBLIK ====================
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
-Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
+// ==================== HALAMAN PUBLIK (Dengan Edge Caching untuk Guest) ====================
+Route::middleware(['edge.cache'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
+});
 
 require __DIR__.'/auth.php';
 

@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'admin' => \App\Http\Middleware\CheckAdmin::class,
+            'edge.cache' => \App\Http\Middleware\EdgeCachePublicResponses::class,
         ]);
 
         $middleware->appendToGroup('web', \App\Http\Middleware\RedirectAdminToPanel::class);
