@@ -184,9 +184,9 @@
 
     /* Welcome Banner Premium */
     .welcome-banner {
-        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #5c1414 100%);
+        background: linear-gradient(135deg, #090d16 0%, #1c1917 40%, #311042 100%);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: var(--shadow-md) !important;
+        box-shadow: var(--shadow-lg) !important;
     }
     
     .backdrop-blur {
@@ -199,18 +199,18 @@
         border-radius: var(--radius-lg);
         transition: var(--transition);
         border: 1px solid var(--border-color) !important;
-        background: #fff;
+        background: var(--card-bg) !important;
     }
     .stat-card:hover {
         transform: translateY(-5px);
-        box-shadow: var(--shadow-premium) !important;
-        border-color: rgba(230, 126, 34, 0.15) !important;
+        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15) !important;
+        border-color: rgba(99, 102, 241, 0.3) !important;
     }
 
     /* Background Soft Warna Tonalitas Elegan */
-    .bg-primary-soft { background-color: rgba(59, 130, 246, 0.08); }
-    .bg-success-soft { background-color: rgba(16, 185, 129, 0.08); }
-    .bg-warning-soft { background-color: rgba(245, 158, 11, 0.08); }
+    .bg-primary-soft { background-color: rgba(99, 102, 241, 0.1) !important; }
+    .bg-success-soft { background-color: rgba(16, 185, 129, 0.1) !important; }
+    .bg-warning-soft { background-color: rgba(245, 158, 11, 0.1) !important; }
 
     /* Icon Wrappers (Pojok Kanan Kartu) */
     .stat-icon-wrapper {
@@ -232,12 +232,12 @@
         border-radius: var(--radius-lg);
         transition: var(--transition);
         border: 1px solid var(--border-color) !important;
-        background: #fff;
+        background: var(--card-bg) !important;
     }
     .action-card:hover {
         transform: translateY(-5px);
-        box-shadow: var(--shadow-md) !important;
-        border-color: rgba(168, 28, 28, 0.15) !important;
+        box-shadow: 0 10px 20px rgba(99, 102, 241, 0.1) !important;
+        border-color: rgba(99, 102, 241, 0.3) !important;
     }
     .action-icon {
         width: 50px;

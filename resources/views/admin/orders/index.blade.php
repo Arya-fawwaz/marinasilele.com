@@ -113,7 +113,7 @@
     }
 
     .table tbody tr {
-        background-color: #ffffff !important;
+        background-color: var(--card-bg) !important;
         box-shadow: var(--shadow-sm) !important;
         border-radius: var(--radius-lg);
         transition: var(--transition) !important;
@@ -139,7 +139,7 @@
 
     .table tbody tr:hover {
         transform: translateY(-3px) scale(1.002);
-        box-shadow: var(--shadow-premium) !important;
+        box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15) !important;
     }
 
     @keyframes pulse { 
