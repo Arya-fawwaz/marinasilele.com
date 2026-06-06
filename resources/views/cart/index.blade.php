@@ -48,7 +48,7 @@
                                         <td class="ps-4 py-4">
                                             <div class="d-flex align-items-center gap-3">
                                                 <div class="bg-light rounded-3 d-flex align-items-center justify-content-center border shadow-sm flex-shrink-0" style="width: 65px; height: 65px; overflow: hidden;">
-                                                    <img src="{{ $item->product->image_url }}" alt="{{ $item->product->name }}" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                                                    <img src="{{ $item->product->image_url }}" alt="{{ $item->product->name }}" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                                                 </div>
                                                 <div>
                                                     <h6 class="fw-bold text-dark mb-1">{{ Str::limit($item->product->name, 35) }}</h6>

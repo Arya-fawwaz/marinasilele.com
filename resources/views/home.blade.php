@@ -481,12 +481,8 @@
     <div class="hero-banner-wrapper animate-fade-up" style="animation-delay: 0.1s;">
         <div class="hero-banner" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1500">
             <a href="{{ route('products.index') }}">
-                @php
-                    $bannerPath = public_path('images/banner-lauk.mp4');
-                    $bannerUrl = file_exists($bannerPath) ? asset('images/banner-lauk.mp4') : 'http://googleusercontent.com/generated_video_content/6740527814937026519';
-                @endphp
-                <video autoplay loop muted playsinline>
-                    <source src="{{ $bannerUrl }}" type="video/mp4">
+                <video autoplay loop muted playsinline preload="none" poster="">
+                    <source src="{{ asset('images/banner-lauk.mp4') }}" type="video/mp4">
                     Browser Anda tidak mendukung tag video HTML5.
                 </video>
             </a>
@@ -544,7 +540,7 @@
                     <div class="product-img-wrapper">
                         <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-3 z-index-1 rounded-pill fw-bold shadow-lg py-2 px-3">🔥 Terlaris</span>
                         <div class="price-tag">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
-                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}">
+                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}" loading="lazy">
                     </div>
                     <div class="card-body d-flex flex-column p-4" style="transform: translateZ(30px);">
                         <h5 class="card-title fw-bolder text-dark mb-2 fs-4">{{ $product->name }}</h5>
@@ -598,7 +594,7 @@
                         <div class="d-flex align-items-center mt-auto">
                             <div class="bg-danger-subtle rounded-circle d-flex align-items-center justify-content-center fw-bolder shadow-sm overflow-hidden flex-shrink-0" style="width: 50px; height: 50px; font-size: 1.2rem; color: var(--brand-primary); border: 2px solid #fff;">
                                 @if(optional($testi->user)->avatar)
-                                    <img src="{{ asset($testi->user->avatar) }}" alt="Foto Pelanggan" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img src="{{ asset($testi->user->avatar) }}" alt="Foto Pelanggan" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                                 @else
                                     {{ strtoupper(substr(optional($testi->user)->name ?? 'A', 0, 1)) }}
                                 @endif
@@ -693,7 +689,7 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js" defer></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Hanya aktifkan tilt di desktop untuk mencegah lag dan layout jumps di layar sentuh handphone

@@ -13,7 +13,7 @@ class TestimonialController extends Controller
         $testimonials = Testimonial::with('user:id,name,avatar')
             ->select('id', 'user_id', 'rating', 'comment', 'created_at')
             ->latest()
-            ->get();
+            ->paginate(10);
         return view('testimonials.index', compact('testimonials'));
     }
 

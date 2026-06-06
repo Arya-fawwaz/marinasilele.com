@@ -437,10 +437,11 @@
 
             <div class="d-flex align-items-center gap-2 gap-md-3 order-lg-3">
                 @php
-                    $cartCount = 0;
-                    if(auth()->check()) {
-                        $cartCount = \App\Models\Cart::where('user_id', auth()->id())->count();
+                    // Cache cart count to avoid duplicate DB queries (used in navbar + mobile nav)
+                    if (!isset($__cartCount)) {
+                        $__cartCount = auth()->check() ? \App\Models\Cart::where('user_id', auth()->id())->count() : 0;
                     }
+                    $cartCount = $__cartCount;
                 @endphp
 
                 <a href="{{ route('cart.index') }}" class="cart-icon-wrapper text-decoration-none" title="Buka Keranjang">
@@ -455,7 +456,7 @@
                         <a class="text-decoration-none dropdown-user-wrapper text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="user-avatar shadow-sm">
                                 @if(auth()->user()->avatar)
-                                    <img src="{{ asset(auth()->user()->avatar) }}" alt="Foto Profil">
+                                    <img src="{{ asset(auth()->user()->avatar) }}" alt="Foto Profil" loading="lazy">
                                 @else
                                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                                 @endif
@@ -572,10 +573,8 @@
         <a href="{{ route('cart.index') }}" class="mobile-bottom-nav-item {{ request()->routeIs('cart.index') ? 'active' : '' }}">
             <i class="fas fa-shopping-bag"></i>
             @php
-                $mobileCartCount = 0;
-                if(auth()->check()) {
-                    $mobileCartCount = \App\Models\Cart::where('user_id', auth()->id())->count();
-                }
+                // Reuse cached cart count from navbar
+                $mobileCartCount = $__cartCount ?? (auth()->check() ? \App\Models\Cart::where('user_id', auth()->id())->count() : 0);
             @endphp
             @if($mobileCartCount > 0)
                 <span class="mobile-cart-badge">{{ $mobileCartCount }}</span>
@@ -599,7 +598,7 @@
         @endauth
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
     @stack('scripts')
 </body>
 </html>

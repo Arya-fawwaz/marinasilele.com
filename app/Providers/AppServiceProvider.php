@@ -14,7 +14,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Dynamically optimize configurations for Vercel Serverless environment
+        if (env('VERCEL') === '1') {
+            config([
+                'view.compiled' => '/tmp',
+                'session.driver' => 'cookie',
+                'cache.default' => 'array',
+                'logging.default' => 'stderr',
+            ]);
+        }
     }
 
     /**

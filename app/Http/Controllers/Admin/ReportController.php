@@ -36,7 +36,7 @@ class ReportController extends Controller
         $chartData = Order::select(
                 DB::raw('DATE(created_at) as date'),
                 DB::raw('SUM(total_amount) as total'),
-                DB::raw('SUM((SELECT COALESCE(SUM(quantity), 1) FROM order_items WHERE order_items.order_id = orders.id)) as volume')
+                DB::raw('COUNT(*) as volume')
             )
             ->whereIn('status', ['success', 'completed'])
             ->groupBy('date')

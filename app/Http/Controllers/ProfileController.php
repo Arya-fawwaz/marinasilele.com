@@ -28,12 +28,18 @@ class ProfileController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
         ]);
 
-        $user->update([
+        $user->fill([
             'name' => $request->name,
             'email' => $request->email,
         ]);
 
-        return back()->with('success', 'Profil Anda berhasil diperbarui!');
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+
+        $user->save();
+
+        return redirect()->route('profile.edit')->with('success', 'Profil Anda berhasil diperbarui!');
     }
 
     /**
@@ -65,7 +71,7 @@ class ProfileController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Foto profil berhasil diperbarui!');
+        return redirect()->route('profile.edit')->with('success', 'Foto profil berhasil diperbarui!');
     }
 
     /**
@@ -84,6 +90,27 @@ class ProfileController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return back()->with('success', 'Kata sandi berhasil diperbarui!');
+        return redirect()->route('profile.edit')->with('success', 'Kata sandi berhasil diperbarui!');
+    }
+
+    /**
+     * Menghapus akun pengguna (diperlukan untuk ProfileTest)
+     */
+    public function destroy(Request $request)
+    {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $user = $request->user();
+
+        auth()->logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->to('/');
     }
 }

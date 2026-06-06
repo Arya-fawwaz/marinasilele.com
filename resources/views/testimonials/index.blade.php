@@ -67,7 +67,7 @@
                 </div>
             @endauth
 
-            <h5 class="fw-bold text-dark mb-4">Ulasan Terbaru ({{ $testimonials->count() }})</h5>
+            <h5 class="fw-bold text-dark mb-4">Ulasan Terbaru ({{ $testimonials->total() }})</h5>
             
             <div class="d-flex flex-column gap-4">
                 @forelse($testimonials as $testi)
@@ -100,6 +100,10 @@
                         <h6>Belum ada ulasan yang diberikan.</h6>
                     </div>
                 @endforelse
+            </div>
+
+            <div class="d-flex justify-content-center mt-4">
+                {{ $testimonials->links() }}
             </div>
         </div>
     </div>

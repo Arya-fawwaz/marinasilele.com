@@ -50,3 +50,15 @@ if (isSymlink) {
 
 console.log('Running vite build...');
 execSync('vite build', { stdio: 'inherit' });
+
+// Clear Laravel route, view, and event caches at build time on Vercel to prevent path-mismatch issues
+try {
+    console.log('Clearing Laravel optimization caches...');
+    execSync('php artisan config:clear', { stdio: 'inherit' });
+    execSync('php artisan route:clear', { stdio: 'inherit' });
+    execSync('php artisan view:clear', { stdio: 'inherit' });
+    execSync('php artisan event:clear', { stdio: 'inherit' });
+    console.log('Laravel optimization caches cleared successfully.');
+} catch (e) {
+    console.log('Warning: Laravel optimization clearing failed (this is normal if PHP is not available at build-time):', e.message);
+}

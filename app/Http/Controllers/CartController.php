@@ -11,19 +11,10 @@ class CartController extends Controller
     // Menampilkan halaman keranjang belanja dengan proteksi ganda
     public function index()
     {
-        $cartItems = Cart::with('product')->where('user_id', auth()->id())->get();
+        // Bersihkan item keranjang jika produknya sudah dihapus dari sistem (optimasi single-query)
+        Cart::where('user_id', auth()->id())->whereDoesntHave('product')->delete();
         
-        $hasDeletedItem = false;
-        foreach($cartItems as $item) {
-            if(!$item->product) {
-                $item->delete();
-                $hasDeletedItem = true;
-            }
-        }
-
-        if($hasDeletedItem) {
-            $cartItems = Cart::with('product')->where('user_id', auth()->id())->get();
-        }
+        $cartItems = Cart::with('product')->where('user_id', auth()->id())->get();
         
         return view('cart.index', compact('cartItems'));
     }

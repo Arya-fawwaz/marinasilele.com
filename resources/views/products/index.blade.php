@@ -62,7 +62,7 @@
                                     $productImage = $product->image_url;
                                 @endphp
                                 <img src="{{ $productImage }}" 
-                                     class="card-img-top" alt="{{ $product->name }}">
+                                     class="card-img-top" alt="{{ $product->name }}" loading="lazy">
                             </a>
                             
                             <div class="card-body d-flex flex-column p-4">
