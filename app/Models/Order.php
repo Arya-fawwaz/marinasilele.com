@@ -12,10 +12,14 @@ class Order extends Model
     protected $fillable = [
         'user_id', 
         'order_number', 
-        'shipping_address', // <--- UBAH MENJADI INI
+        'shipping_address',
         'total_price',   
         'total_amount',  
-        'status'
+        'status',
+        'shipping_fee',
+        'distance',
+        'latitude',
+        'longitude'
     ];
 
     // Relasi ke User (Biarkan jika sudah ada)

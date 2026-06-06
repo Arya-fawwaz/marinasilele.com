@@ -10,7 +10,7 @@
         <h2 class="fw-black text-dark mb-0" style="font-weight: 900;">Checkout <span style="color: #A81C1C;">Aman</span></h2>
     </div>
 
-    <form action="{{ route('checkout.process') ?? '#' }}" method="POST" class="animate-fade-in" style="animation-delay: 0.1s;">
+    <form action="{{ route('checkout.process') ?? '#' }}" method="POST" class="animate-fade-in" style="animation-delay: 0.1s;" onsubmit="const btn = this.querySelector('button[type=submit]'); if (btn) { btn.disabled = true; btn.innerHTML = '<i class=\'fas fa-spinner fa-spin me-2\'></i> Memproses...'; }">
         @csrf
         
         <div class="row g-4">

@@ -34,6 +34,10 @@ class CheckoutController extends Controller
         $user = Auth::user();
         $carts = Cart::with('product')->where('user_id', $user->id)->get();
 
+        if ($carts->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Keranjang belanja Anda kosong. Silakan tambahkan produk terlebih dahulu.');
+        }
+
         // Validasi ketersediaan stok sebelum memproses pesanan
         foreach ($carts as $cart) {
             if ($cart->product && $cart->product->stock < $cart->quantity) {
