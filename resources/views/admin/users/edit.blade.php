@@ -37,10 +37,10 @@
                 <div class="card border-0 shadow-sm rounded-4 h-100">
                     <div class="card-body p-4 p-md-5">
                         <div class="d-flex align-items-center mb-4">
-                            <div class="rounded-circle bg-primary-soft text-primary d-flex align-items-center justify-content-center fw-bold me-3" style="width: 50px; height: 50px; font-size: 1.5rem; background-color: rgba(230, 126, 34, 0.1);">
+                            <div class="rounded-circle bg-primary-soft text-primary d-flex align-items-center justify-content-center fw-bold me-3" style="width: 50px; height: 50px; font-size: 1.5rem; background-color: rgba(168, 28, 28, 0.08);">
                                 {{ strtoupper(substr($user->name, 0, 1)) }}
                             </div>
-                            <h5 class="fw-bold text-primary mb-0">Informasi Profil</h5>
+                            <h5 class="fw-bold text-dark mb-0">Informasi Profil</h5>
                         </div>
                         
                         <div class="row g-3">
@@ -79,7 +79,7 @@
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body p-4">
-                        <h5 class="fw-bold mb-4 text-primary"><i class="fas fa-user-shield me-2"></i> Keamanan & Hak Akses</h5>
+                        <h5 class="fw-bold mb-4 text-dark"><i class="fas fa-user-shield me-2 text-danger"></i> Keamanan & Hak Akses</h5>
                         
                         <div class="mb-4">
                             <label class="form-label fw-semibold text-secondary">Role / Peran <span class="text-danger">*</span></label>
@@ -107,7 +107,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-warning text-dark btn-lg w-100 rounded-pill fw-bold shadow-sm">
+                <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold shadow-sm py-3 text-white">
                     <i class="fas fa-sync-alt me-2"></i> Update Pengguna
                 </button>
             </div>
@@ -117,12 +117,8 @@
 
 @push('styles')
 <style>
-    .text-primary { color: #e67e22 !important; }
-    .btn-warning { background-color: #f1c40f; border-color: #f1c40f; }
-    .btn-warning:hover { background-color: #f39c12; border-color: #f39c12; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(241, 196, 15, 0.3); }
-    
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-fade-in { opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+    .animate-fade-in { opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 </style>
 @endpush
 @endsection

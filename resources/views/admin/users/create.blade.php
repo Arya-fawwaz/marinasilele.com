@@ -34,7 +34,7 @@
             <div class="col-lg-8">
                 <div class="card border-0 shadow-sm rounded-4 h-100">
                     <div class="card-body p-4 p-md-5">
-                        <h5 class="fw-bold mb-4 text-primary"><i class="fas fa-id-card me-2"></i> Informasi Profil</h5>
+                        <h5 class="fw-bold mb-4 text-dark"><i class="fas fa-id-card me-2 text-danger"></i> Informasi Profil</h5>
                         
                         <div class="row g-3">
                             <div class="col-md-6 mb-3">
@@ -72,7 +72,7 @@
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body p-4">
-                        <h5 class="fw-bold mb-4 text-primary"><i class="fas fa-user-shield me-2"></i> Keamanan & Hak Akses</h5>
+                        <h5 class="fw-bold mb-4 text-dark"><i class="fas fa-user-shield me-2 text-danger"></i> Keamanan & Hak Akses</h5>
                         
                         <div class="mb-4">
                             <label class="form-label fw-semibold text-secondary">Role / Peran <span class="text-danger">*</span></label>
@@ -94,7 +94,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold shadow-sm">
+                <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold shadow-sm py-3 text-white">
                     <i class="fas fa-save me-2"></i> Simpan Pengguna
                 </button>
             </div>
@@ -104,12 +104,8 @@
 
 @push('styles')
 <style>
-    .text-primary { color: #e67e22 !important; }
-    .btn-primary { background-color: #e67e22; border-color: #e67e22; }
-    .btn-primary:hover { background-color: #d35400; border-color: #d35400; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(230,126,34,0.3); }
-    
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-fade-in { opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+    .animate-fade-in { opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 </style>
 @endpush
 @endsection

@@ -180,15 +180,60 @@
 <style>
     /* UTILITIES */
     .fw-black { font-weight: 900; }
-    .bg-warning-subtle { background-color: #fff3cd !important; }
-    .text-warning-dark { color: #856404 !important; }
-    .bg-success-subtle { background-color: #d1e7dd !important; }
-    .bg-secondary-subtle { background-color: #e2e3e5 !important; }
-    .bg-gradient-primary { background: linear-gradient(135deg, #A81C1C, #8B1515); }
+    .bg-gradient-primary { background: var(--primary-gradient) !important; }
     
-    .transition-all { transition: all 0.3s ease; }
-    .btn:hover { transform: translateY(-2px); }
-    .summary-card { border: 1px solid rgba(0,0,0,0.03); }
+    .transition-all { transition: var(--transition); }
+    .summary-card { 
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--radius-lg);
+        transition: var(--transition);
+    }
+    .summary-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md) !important;
+    }
+
+    /* Floating Table Rows for Sales Reports */
+    .table {
+        border-collapse: separate !important;
+        border-spacing: 0 12px !important;
+        margin-top: -12px;
+    }
+
+    .table thead th {
+        border-bottom: none !important;
+        padding-bottom: 0.5rem !important;
+    }
+
+    .table tbody tr {
+        background-color: #ffffff !important;
+        box-shadow: var(--shadow-sm) !important;
+        border-radius: var(--radius-lg);
+        transition: var(--transition) !important;
+    }
+
+    .table tbody tr td {
+        padding: 1.25rem 1rem !important;
+        border-top: 1px solid var(--border-color) !important;
+        border-bottom: 1px solid var(--border-color) !important;
+    }
+
+    .table tbody tr td:first-child {
+        border-left: 1px solid var(--border-color) !important;
+        border-top-left-radius: var(--radius-lg) !important;
+        border-bottom-left-radius: var(--radius-lg) !important;
+    }
+
+    .table tbody tr td:last-child {
+        border-right: 1px solid var(--border-color) !important;
+        border-top-right-radius: var(--radius-lg) !important;
+        border-bottom-right-radius: var(--radius-lg) !important;
+    }
+
+    .table tbody tr:hover {
+        transform: translateY(-3px) scale(1.002);
+        box-shadow: var(--shadow-premium) !important;
+    }
 
     /* ANIMASI MASUK */
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -197,15 +242,17 @@
     /* PENGATURAN MODE CETAK PDF (PRINT) */
     @media print {
         body { background-color: white !important; font-family: Arial, sans-serif !important; }
-        .d-print-none, .sidebar, .navbar { display: none !important; }
+        .d-print-none, .admin-sidebar, .admin-topbar { display: none !important; }
         .card { box-shadow: none !important; border: 1px solid #dee2e6 !important; margin-bottom: 20px !important; }
-        .table { width: 100% !important; }
+        .table { width: 100% !important; border-collapse: collapse !important; }
+        .table tbody tr { box-shadow: none !important; background: transparent !important; }
+        .table tbody tr td { padding: 8px !important; border: 1px solid #dee2e6 !important; border-radius: 0 !important; }
+        .table tbody tr td:first-child, .table tbody tr td:last-child { border-radius: 0 !important; border: 1px solid #dee2e6 !important; }
         .container-fluid { padding: 0 !important; width: 100% !important; }
         
         /* Memaksa warna background tetap muncul di PDF */
         .bg-gradient-primary { background: #A81C1C !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         .bg-light { background-color: #f8f9fa !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-        .bg-secondary-subtle { background-color: #e2e3e5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         
         /* Sesuaikan ukuran col saat print agar sejajar */
         .col-md-4 { width: 33.333333% !important; float: left !important; }

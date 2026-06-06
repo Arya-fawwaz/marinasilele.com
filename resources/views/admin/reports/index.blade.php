@@ -59,33 +59,33 @@
 @push('styles')
 <style>
     .text-orange { color: #e67e22 !important; }
-    .bg-orange-soft { background-color: rgba(230, 126, 34, 0.12); }
-    .text-blue { color: #3498db !important; }
-    .bg-blue-soft { background-color: rgba(52, 152, 219, 0.12); }
-
-    .btn-primary { background-color: #e67e22; border-color: #e67e22; }
-    .btn-primary:hover { background-color: #d35400; border-color: #d35400; }
+    .bg-orange-soft { background-color: rgba(230, 126, 34, 0.08) !important; }
+    .text-blue { color: #2563eb !important; }
+    .bg-blue-soft { background-color: rgba(59, 130, 246, 0.08) !important; }
 
     .report-menu-card {
-        border-radius: 20px;
-        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border-radius: var(--radius-lg);
+        transition: var(--transition);
+        border: 1px solid var(--border-color) !important;
     }
     .report-menu-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
+        box-shadow: var(--shadow-premium) !important;
+        border-color: rgba(168, 28, 28, 0.15) !important;
     }
 
     .report-icon-box {
-        width: 65px;
-        height: 65px;
-        border-radius: 16px;
+        width: 60px;
+        height: 60px;
+        border-radius: var(--radius-md);
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: 1.25rem;
     }
 
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-fade-in { opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+    .animate-fade-in { opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 </style>
 @endpush
 @endsection

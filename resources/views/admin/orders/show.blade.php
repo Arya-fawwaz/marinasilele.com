@@ -151,22 +151,22 @@
                     
                     {{-- FIX OTOMATIS: Penentuan kotak status murni dideteksi dari kolom tunggal 'status' --}}
                     @if(strtolower($order->status) == 'success' || strtolower($order->status) == 'completed')
-                        <div class="bg-success bg-opacity-10 p-5 rounded-4 border border-success border-opacity-25 animate-fade-in">
-                            <i class="fas fa-check-circle text-success fa-4x mb-3 animate-pulse"></i>
-                            <h4 class="fw-black text-success text-uppercase mb-0" style="font-weight: 900; letter-spacing: 1px;">LUNAS</h4>
-                            <small class="text-success fw-semibold mt-2 d-block">Pembayaran Terverifikasi</small>
+                        <div class="status-glowing-box success animate-fade-in">
+                            <i class="fas fa-check-circle fa-4x mb-3 animate-pulse"></i>
+                            <h4 class="fw-black text-uppercase mb-0" style="letter-spacing: 1px;">LUNAS</h4>
+                            <small class="fw-semibold mt-2 d-block text-muted">Pembayaran Terverifikasi</small>
                         </div>
                     @elseif(strtolower($order->status) == 'awaiting_confirmation' || strtolower($order->status) == 'processing')
-                        <div class="bg-info bg-opacity-10 p-5 rounded-4 border border-info border-opacity-25 animate-fade-in">
-                            <i class="fas fa-clock text-info fa-4x mb-3 animate-pulse"></i>
-                            <h4 class="fw-black text-info text-uppercase mb-0" style="font-weight: 900; letter-spacing: 1px;">KLAIM COD</h4>
-                            <small class="text-info fw-semibold mt-2 d-block">Menunggu Setoran Tunai</small>
+                        <div class="status-glowing-box info animate-fade-in">
+                            <i class="fas fa-clock fa-4x mb-3 animate-pulse"></i>
+                            <h4 class="fw-black text-uppercase mb-0" style="letter-spacing: 1px;">KLAIM COD</h4>
+                            <small class="fw-semibold mt-2 d-block text-muted">Menunggu Setoran Tunai</small>
                         </div>
                     @else
-                        <div class="bg-danger bg-opacity-10 p-5 rounded-4 border border-danger border-opacity-25 animate-fade-in">
-                            <i class="fas fa-times-circle text-danger fa-4x mb-3 animate-pulse"></i>
-                            <h4 class="fw-black text-danger text-uppercase mb-0" style="font-weight: 900; letter-spacing: 1px;">BELUM BAYAR</h4>
-                            <small class="text-danger fw-semibold mt-2 d-block">Menunggu Transaksi</small>
+                        <div class="status-glowing-box danger animate-fade-in">
+                            <i class="fas fa-times-circle fa-4x mb-3 animate-pulse"></i>
+                            <h4 class="fw-black text-uppercase mb-0" style="letter-spacing: 1px;">BELUM BAYAR</h4>
+                            <small class="fw-semibold mt-2 d-block text-muted">Menunggu Transaksi</small>
                         </div>
                     @endif
 
@@ -217,13 +217,39 @@
 @push('styles')
 <style>
     .fw-black { font-weight: 900; }
-    .border-start-md { border-left: 1px solid rgba(0,0,0,0.08) !important; }
+    .border-start-md { border-left: 1px solid var(--border-color) !important; }
     @media (max-width: 767.98px) { .border-start-md { border-left: none !important; } }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     .animate-fade-in { animation: fadeInUp 0.5s ease forwards; }
-    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+    @keyframes pulse { 0% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.02); opacity: 1; } 100% { transform: scale(1); opacity: 0.85; } }
     .animate-pulse { animation: pulse 2.5s infinite ease-in-out; }
     select:focus { border-color: #A81C1C !important; box-shadow: 0 0 0 0.25rem rgba(168, 28, 28, 0.15) !important; }
+
+    /* Glowing Status Boxes */
+    .status-glowing-box {
+        border-radius: var(--radius-lg);
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+        border: 1px solid transparent;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+    }
+    .status-glowing-box.success {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.08) 100%);
+        border-color: rgba(16, 185, 129, 0.2);
+        color: #059669;
+    }
+    .status-glowing-box.info {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.08) 100%);
+        border-color: rgba(59, 130, 246, 0.2);
+        color: #2563eb;
+    }
+    .status-glowing-box.danger {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(220, 38, 38, 0.08) 100%);
+        border-color: rgba(239, 68, 68, 0.2);
+        color: #dc2626;
+    }
 </style>
 @endpush
 

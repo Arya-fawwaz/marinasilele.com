@@ -184,8 +184,9 @@
 
     /* Welcome Banner Premium */
     .welcome-banner {
-        background: linear-gradient(135deg, #1A1A1A 0%, #A81C1C 100%);
-        border: 1px solid rgba(255,255,255,0.1);
+        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #5c1414 100%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: var(--shadow-md) !important;
     }
     
     .backdrop-blur {
@@ -195,31 +196,32 @@
 
     /* Stat Cards (3D Hover Effect) */
     .stat-card {
-        border-radius: 1.25rem;
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        border: 1px solid rgba(0,0,0,0.03) !important;
+        border-radius: var(--radius-lg);
+        transition: var(--transition);
+        border: 1px solid var(--border-color) !important;
+        background: #fff;
     }
     .stat-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important;
-        border-color: rgba(0,0,0,0.08) !important;
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-premium) !important;
+        border-color: rgba(230, 126, 34, 0.15) !important;
     }
 
     /* Background Soft Warna Tonalitas Elegan */
-    .bg-primary-soft { background-color: rgba(52, 152, 219, 0.1); }
-    .bg-success-soft { background-color: rgba(46, 204, 113, 0.12); }
-    .bg-warning-soft { background-color: rgba(230, 126, 34, 0.1); } /* Sinkronisasi ke warna oranye soft */
+    .bg-primary-soft { background-color: rgba(59, 130, 246, 0.08); }
+    .bg-success-soft { background-color: rgba(16, 185, 129, 0.08); }
+    .bg-warning-soft { background-color: rgba(245, 158, 11, 0.08); }
 
     /* Icon Wrappers (Pojok Kanan Kartu) */
     .stat-icon-wrapper {
-        width: 65px;
-        height: 65px;
-        border-radius: 18px;
+        width: 55px;
+        height: 55px;
+        border-radius: var(--radius-md);
         display: flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        transition: all 0.3s ease;
+        transition: var(--transition);
     }
     .stat-card:hover .stat-icon-wrapper {
         transform: scale(1.1) rotate(5deg);
@@ -227,51 +229,52 @@
 
     /* Action Cards (Shortcut) */
     .action-card {
-        border-radius: 1rem;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(0,0,0,0.04) !important;
+        border-radius: var(--radius-lg);
+        transition: var(--transition);
+        border: 1px solid var(--border-color) !important;
+        background: #fff;
     }
     .action-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 15px 25px rgba(0,0,0,0.06) !important;
-        border-color: rgba(168, 28, 28, 0.2) !important;
+        box-shadow: var(--shadow-md) !important;
+        border-color: rgba(168, 28, 28, 0.15) !important;
     }
     .action-icon {
-        width: 55px;
-        height: 55px;
-        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.25rem;
-        transition: all 0.3s ease;
+        font-size: 1.15rem;
+        transition: var(--transition);
     }
     .action-card:hover .action-icon {
-        transform: scale(1.15);
+        transform: scale(1.1) rotate(-5deg);
     }
 
     /* Kustomisasi Warna Spesifik */
-    .text-primary { color: #3498db !important; }
-    .text-success { color: #2ecc71 !important; }
-    .text-warning { color: #e67e22 !important; }
+    .text-primary { color: #2563eb !important; }
+    .text-success { color: #10b981 !important; }
+    .text-warning { color: #f59e0b !important; }
     
-    .btn-outline-primary { border-color: rgba(52, 152, 219, 0.3); }
-    .btn-outline-primary:hover { background-color: #3498db; border-color: #3498db; }
+    .btn-outline-primary { border-color: rgba(59, 130, 246, 0.3) !important; color: #2563eb !important; background: transparent !important; }
+    .btn-outline-primary:hover { background: #2563eb !important; border-color: #2563eb !important; color: #fff !important; }
     
-    .btn-outline-success { border-color: rgba(46, 204, 113, 0.3); }
-    .btn-outline-success:hover { background-color: #2ecc71; border-color: #2ecc71; color: white;}
+    .btn-outline-success { border-color: rgba(16, 185, 129, 0.3) !important; color: #10b981 !important; background: transparent !important; }
+    .btn-outline-success:hover { background: #10b981 !important; border-color: #10b981 !important; color: white !important;}
     
-    .btn-outline-warning { border-color: rgba(230, 126, 34, 0.3); color: #e67e22; }
-    .btn-outline-warning:hover { background-color: #e67e22; border-color: #e67e22; color: #fff;}
+    .btn-outline-warning { border-color: rgba(245, 158, 11, 0.3) !important; color: #f59e0b !important; background: transparent !important; }
+    .btn-outline-warning:hover { background: #f59e0b !important; border-color: #f59e0b !important; color: #fff !important;}
 
     /* Animasi Fade In */
     @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(25px); }
+        from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-in {
         opacity: 0;
-        animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     /* Mobile responsive optimizations */

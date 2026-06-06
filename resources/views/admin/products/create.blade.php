@@ -52,10 +52,14 @@
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body p-4">
-                        <h5 class="fw-bold mb-4 text-primary"><i class="fas fa-image me-2"></i> Foto Produk</h5>
+                        <h5 class="fw-bold mb-4 text-dark"><i class="fas fa-image me-2 text-danger"></i> Foto Produk</h5>
                         
-                        <div class="text-center mb-3">
-                            <img id="imagePreview" src="https://via.placeholder.com/300x300?text=Preview+Gambar" class="img-fluid rounded-3 object-fit-cover shadow-sm" style="height: 250px; width: 100%; border: 2px dashed #dee2e6;" alt="Preview">
+                        <div class="image-preview-container mb-3 text-center position-relative">
+                            <div class="preview-placeholder" id="previewPlaceholder">
+                                <i class="fas fa-cloud-upload-alt fa-3x mb-2 text-muted" style="transition: var(--transition);"></i>
+                                <span class="fw-semibold small">Pilih gambar atau isi URL</span>
+                            </div>
+                            <img id="imagePreview" src="" class="img-fluid" alt="Preview">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold text-secondary">Upload File Gambar</label>
@@ -72,7 +76,7 @@
 
                 <div class="card border-0 shadow-sm rounded-4">
                     <div class="card-body p-4">
-                        <h5 class="fw-bold mb-4 text-primary"><i class="fas fa-cog me-2"></i> Pengaturan</h5>
+                        <h5 class="fw-bold mb-4 text-dark"><i class="fas fa-cog me-2 text-danger"></i> Pengaturan</h5>
                         
                         <div class="mb-4">
                             <label class="form-label fw-semibold text-secondary">Kategori <span class="text-danger">*</span></label>
@@ -92,7 +96,7 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold shadow-sm">
+                        <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold shadow-sm py-3">
                             <i class="fas fa-save me-2"></i> Simpan Produk
                         </button>
                     </div>
@@ -101,6 +105,57 @@
         </div>
     </form>
 </div>
+@endsection
+
+@push('styles')
+<style>
+    .image-preview-container {
+        position: relative;
+        border: 2.5px dashed var(--border-color);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        background: #f8fafc;
+        transition: var(--transition);
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .image-preview-container:hover {
+        border-color: var(--primary);
+        background: #fff;
+    }
+    .image-preview-container:hover .preview-placeholder i {
+        color: var(--primary) !important;
+        transform: translateY(-5px);
+    }
+    .preview-placeholder {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        pointer-events: none;
+        transition: var(--transition);
+        z-index: 1;
+    }
+    #imagePreview {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 2;
+        position: relative;
+        opacity: 0;
+        transition: var(--transition);
+        border-radius: var(--radius-lg);
+    }
+    #imagePreview.has-image {
+        opacity: 1;
+    }
+</style>
+@endpush
 
 @push('scripts')
 <script>
@@ -109,7 +164,8 @@
         reader.onload = function() {
             var output = document.getElementById('imagePreview');
             output.src = reader.result;
-            output.style.border = 'none';
+            output.classList.add('has-image');
+            document.getElementById('previewPlaceholder').style.opacity = '0';
             document.getElementById('imageUrlInput').value = '';
         }
         if(event.target.files[0]) {
@@ -121,13 +177,14 @@
         var output = document.getElementById('imagePreview');
         if (url) {
             output.src = url;
-            output.style.border = 'none';
+            output.classList.add('has-image');
+            document.getElementById('previewPlaceholder').style.opacity = '0';
             document.getElementById('imageInput').value = '';
         } else {
-            output.src = 'https://via.placeholder.com/300x300?text=Preview+Gambar';
-            output.style.border = '2px dashed #dee2e6';
+            output.src = '';
+            output.classList.remove('has-image');
+            document.getElementById('previewPlaceholder').style.opacity = '1';
         }
     }
 </script>
 @endpush
-@endsection

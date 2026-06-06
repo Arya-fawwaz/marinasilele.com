@@ -99,10 +99,56 @@
 @push('styles')
 <style>
     .fw-black { font-weight: 900; }
-    .bg-success-subtle { background-color: #d1e7dd !important; color: #0f5132 !important; }
-    .bg-danger-subtle { background-color: #f8d7da !important; color: #842029 !important; }
-    @keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
-    .animate-pulse { animation: pulse 2s infinite; }
+    
+    /* Table Floating Rows */
+    .table {
+        border-collapse: separate !important;
+        border-spacing: 0 12px !important;
+        margin-top: -12px;
+    }
+
+    .table thead th {
+        border-bottom: none !important;
+        padding-bottom: 0.5rem !important;
+    }
+
+    .table tbody tr {
+        background-color: #ffffff !important;
+        box-shadow: var(--shadow-sm) !important;
+        border-radius: var(--radius-lg);
+        transition: var(--transition) !important;
+    }
+
+    .table tbody tr td {
+        padding: 1.25rem 1rem !important;
+        border-top: 1px solid var(--border-color) !important;
+        border-bottom: 1px solid var(--border-color) !important;
+    }
+
+    .table tbody tr td:first-child {
+        border-left: 1px solid var(--border-color) !important;
+        border-top-left-radius: var(--radius-lg) !important;
+        border-bottom-left-radius: var(--radius-lg) !important;
+    }
+
+    .table tbody tr td:last-child {
+        border-right: 1px solid var(--border-color) !important;
+        border-top-right-radius: var(--radius-lg) !important;
+        border-bottom-right-radius: var(--radius-lg) !important;
+    }
+
+    .table tbody tr:hover {
+        transform: translateY(-3px) scale(1.002);
+        box-shadow: var(--shadow-premium) !important;
+    }
+
+    @keyframes pulse { 
+        0% { opacity: 0.7; transform: scale(0.98); } 
+        50% { opacity: 1; transform: scale(1); } 
+        100% { opacity: 0.7; transform: scale(0.98); } 
+    }
+    .animate-pulse { animation: pulse 2s infinite ease-in-out; }
+    
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     .animate-fade-in { opacity: 0; animation: fadeInUp 0.5s ease forwards; }
 </style>

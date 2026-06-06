@@ -105,35 +105,74 @@
 
 @push('styles')
 <style>
-    /* Styling Badge Soft Colors */
-    .bg-primary-soft { background-color: rgba(52, 152, 219, 0.15); }
-    .bg-danger-subtle { background-color: #f8d7da !important; }
-    .bg-secondary-subtle { background-color: #e2e3e5 !important; color: #41464b !important; }
-    
-    /* Styling Tombol Utama (Warna Tema) */
-    .btn-primary { background-color: #e67e22; border-color: #e67e22; }
-    .btn-primary:hover { background-color: #d35400; border-color: #d35400; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(230,126,34,0.3); }
-
-    /* Styling Tombol Aksi Bulat */
-    .action-btn { 
-        width: 36px; 
-        height: 36px; 
-        display: inline-flex; 
-        align-items: center; 
-        justify-content: center; 
-        transition: all 0.2s; 
-        border: 1px solid #eee;
+    /* Table Floating Rows */
+    .table {
+        border-collapse: separate !important;
+        border-spacing: 0 12px !important;
+        margin-top: -12px;
     }
-    .action-btn.text-primary:hover { background-color: #e67e22; color: white !important; border-color: #e67e22; transform: translateY(-2px); }
-    .action-btn.text-danger:hover { background-color: #dc3545; color: white !important; border-color: #dc3545; transform: translateY(-2px); }
+
+    .table thead th {
+        border-bottom: none !important;
+        padding-bottom: 0.5rem !important;
+    }
+
+    .table tbody tr {
+        background-color: #ffffff !important;
+        box-shadow: var(--shadow-sm) !important;
+        border-radius: var(--radius-lg);
+        transition: var(--transition) !important;
+    }
+
+    .table tbody tr td {
+        padding: 1.25rem 1rem !important;
+        border-top: 1px solid var(--border-color) !important;
+        border-bottom: 1px solid var(--border-color) !important;
+    }
+
+    .table tbody tr td:first-child {
+        border-left: 1px solid var(--border-color) !important;
+        border-top-left-radius: var(--radius-lg) !important;
+        border-bottom-left-radius: var(--radius-lg) !important;
+    }
+
+    .table tbody tr td:last-child {
+        border-right: 1px solid var(--border-color) !important;
+        border-top-right-radius: var(--radius-lg) !important;
+        border-bottom-right-radius: var(--radius-lg) !important;
+    }
+
+    .table tbody tr:hover {
+        transform: translateY(-3px) scale(1.002);
+        box-shadow: var(--shadow-premium) !important;
+    }
+
+    /* Soft Avatar */
+    .bg-primary-soft {
+        background-color: rgba(168, 28, 28, 0.08) !important;
+        color: var(--primary) !important;
+    }
+
+    /* Action Buttons */
+    .action-btn {
+        width: 36px;
+        height: 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        border: 1px solid var(--border-color);
+        border-radius: 10px !important;
+    }
     
-    /* Efek Tabel Hover */
-    .transition-all { transition: all 0.2s ease; }
-    table tbody tr:hover { background-color: #f8f9fa; transform: scale(1.002); }
+    .action-btn.text-primary { color: #0b5ed7 !important; background: rgba(13, 110, 253, 0.06) !important; }
+    .action-btn.text-primary:hover { background-color: #0b5ed7 !important; color: white !important; border-color: #0b5ed7 !important; }
     
-    /* Animasi Masuk */
+    .action-btn.text-danger { color: #dc2626 !important; background: rgba(220, 53, 69, 0.06) !important; }
+    .action-btn.text-danger:hover { background-color: #dc2626 !important; color: white !important; border-color: #dc2626 !important; }
+
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-fade-in { opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+    .animate-fade-in { opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 </style>
 @endpush
 @endsection

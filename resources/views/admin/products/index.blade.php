@@ -144,57 +144,57 @@
 
     /* Tabel Custom: Floating Rows */
     .table-custom {
-        border-collapse: separate;
-        border-spacing: 0 12px; /* Memberikan jarak antar baris */
+        border-collapse: separate !important;
+        border-spacing: 0 12px !important; /* Memberikan jarak antar baris */
         margin-top: -12px;
     }
 
     .table-custom thead th {
-        border-bottom: none;
-        padding-bottom: 0.5rem;
+        border-bottom: none !important;
+        padding-bottom: 0.5rem !important;
     }
 
     .table-custom tbody tr {
-        background-color: #ffffff;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-        border-radius: 15px;
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        background-color: #ffffff !important;
+        box-shadow: var(--shadow-sm) !important;
+        border-radius: var(--radius-lg);
+        transition: var(--transition) !important;
         opacity: 0;
         animation: fadeInUpRow 0.5s ease forwards;
     }
 
     .table-custom tbody tr td {
-        padding: 1.25rem 1rem;
-        border-top: 1px solid rgba(0,0,0,0.015);
-        border-bottom: 1px solid rgba(0,0,0,0.015);
-        vertical-align: middle;
+        padding: 1.25rem 1rem !important;
+        border-top: 1px solid var(--border-color) !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        vertical-align: middle !important;
     }
 
     /* Radius untuk sudut melengkung baris tabel */
     .table-custom tbody tr td:first-child {
-        border-left: 1px solid rgba(0,0,0,0.015);
-        border-top-left-radius: 15px;
-        border-bottom-left-radius: 15px;
+        border-left: 1px solid var(--border-color) !important;
+        border-top-left-radius: var(--radius-lg) !important;
+        border-bottom-left-radius: var(--radius-lg) !important;
     }
 
     .table-custom tbody tr td:last-child {
-        border-right: 1px solid rgba(0,0,0,0.015);
-        border-top-right-radius: 15px;
-        border-bottom-right-radius: 15px;
+        border-right: 1px solid var(--border-color) !important;
+        border-top-right-radius: var(--radius-lg) !important;
+        border-bottom-right-radius: var(--radius-lg) !important;
     }
 
     /* Efek Hover Baris */
     .row-hover-lift:hover {
-        transform: translateY(-3px) scale(1.005);
-        box-shadow: 0 15px 30px rgba(230, 126, 34, 0.08); /* Shadow aksen orange */
-        border-color: transparent;
+        transform: translateY(-3px) scale(1.002);
+        box-shadow: var(--shadow-premium) !important;
+        border-color: rgba(230, 126, 34, 0.15) !important;
     }
 
     /* Thumbnail Produk */
     .product-thumbnail {
         width: 55px;
         height: 55px;
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         overflow: hidden;
         background-color: #f8f9fa;
         flex-shrink: 0;
@@ -215,18 +215,19 @@
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        transition: all 0.2s ease;
+        transition: var(--transition);
+        border: 1px solid var(--border-color);
     }
 
-    .bg-primary-soft { background-color: rgba(13, 110, 253, 0.1); }
-    .bg-danger-soft { background-color: rgba(220, 53, 69, 0.1); }
+    .bg-primary-soft { background-color: rgba(13, 110, 253, 0.08) !important; }
+    .bg-danger-soft { background-color: rgba(220, 53, 69, 0.08) !important; }
     
     .btn-action:hover {
         transform: translateY(-2px);
     }
     
-    .btn-action.bg-primary-soft:hover { background-color: #0d6efd; color: white !important; }
-    .btn-action.bg-danger-soft:hover { background-color: #dc3545; color: white !important; }
+    .btn-action.bg-primary-soft:hover { background-color: #0d6efd !important; color: white !important; border-color: #0d6efd !important; }
+    .btn-action.bg-danger-soft:hover { background-color: #dc3545 !important; color: white !important; border-color: #dc3545 !important; }
 
     /* Badge Stok Modern */
     .badge-modern {
@@ -237,8 +238,8 @@
         display: inline-block;
     }
     
-    .bg-success-soft { background-color: rgba(25, 135, 84, 0.15); }
-    .bg-warning-soft { background-color: rgba(255, 193, 7, 0.2); }
+    .bg-success-soft { background-color: rgba(25, 135, 84, 0.08); }
+    .bg-warning-soft { background-color: rgba(255, 193, 7, 0.08); }
 
     /* Indikator Status Denyut (Pulse) */
     .status-indicator {
@@ -267,15 +268,16 @@
 
     /* Tombol Utama (Orange Theme Admin) */
     .btn-add-modern {
-        background: linear-gradient(135deg, #e67e22, #f39c12);
-        color: white;
-        border: none;
-        transition: all 0.3s ease;
+        background: var(--primary-gradient) !important;
+        color: white !important;
+        border: none !important;
+        transition: var(--transition);
+        box-shadow: 0 4px 12px rgba(230, 126, 34, 0.2);
     }
 
     .btn-add-modern:hover {
-        background: linear-gradient(135deg, #d35400, #e67e22);
-        color: white;
+        background: linear-gradient(135deg, #d35400, #e67e22) !important;
+        color: white !important;
         transform: translateY(-2px);
         box-shadow: 0 8px 15px rgba(230, 126, 34, 0.3) !important;
     }
