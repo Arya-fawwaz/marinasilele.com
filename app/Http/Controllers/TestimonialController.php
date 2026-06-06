@@ -30,6 +30,9 @@ class TestimonialController extends Controller
             'comment' => $request->comment,
         ]);
 
+        // Hapus cache halaman beranda agar testimoni baru langsung tampil
+        cache()->forget('home_testimonials');
+
         return back()->with('success', 'Terima kasih! Ulasan bintang ' . $request->rating . ' Anda berhasil dikirim.');
     }
 }

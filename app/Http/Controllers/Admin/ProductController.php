@@ -46,6 +46,9 @@ class ProductController extends Controller
         }
         Product::create($data);
 
+        // Hapus cache produk unggulan di beranda
+        cache()->forget('home_featured_products');
+
         return redirect()->route('admin.products.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
@@ -78,12 +81,19 @@ class ProductController extends Controller
 
         $product->update($data);
 
+        // Hapus cache produk unggulan di beranda
+        cache()->forget('home_featured_products');
+
         return redirect()->route('admin.products.index')->with('success', 'Produk berhasil diperbarui.');
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
+
+        // Hapus cache produk unggulan di beranda
+        cache()->forget('home_featured_products');
+
         return redirect()->route('admin.products.index')->with('success', 'Produk dihapus.');
     }
 }
