@@ -17,8 +17,6 @@
             
             <div class="col-lg-7">
                 
-            <div class="col-lg-7">
-                
                 <!-- Tipe Pengiriman -->
                 <div class="card border-0 shadow-sm rounded-4 mb-4 border">
                     <div class="card-body p-4 p-md-5">
