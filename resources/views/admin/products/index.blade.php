@@ -186,8 +186,8 @@
     /* Efek Hover Baris */
     .row-hover-lift:hover {
         transform: translateY(-3px) scale(1.002);
-        box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15) !important;
-        border-color: rgba(99, 102, 241, 0.3) !important;
+        box-shadow: 0 10px 20px rgba(201, 42, 42, 0.08) !important;
+        border-color: rgba(201, 42, 42, 0.2) !important;
     }
 
     /* Thumbnail Produk */
@@ -266,20 +266,20 @@
         100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(25, 135, 84, 0); }
     }
 
-    /* Tombol Utama (Orange Theme Admin) */
+    /* Tombol Utama (Crimson/Orange Theme Admin) */
     .btn-add-modern {
         background: var(--primary-gradient) !important;
         color: white !important;
         border: none !important;
         transition: var(--transition);
-        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        box-shadow: 0 4px 12px rgba(201, 42, 42, 0.2);
     }
 
     .btn-add-modern:hover {
-        background: linear-gradient(135deg, #4f46e5, #7c3aed) !important;
+        background: linear-gradient(135deg, #a81c1c, #d35400) !important;
         color: white !important;
         transform: translateY(-2px);
-        box-shadow: 0 8px 15px rgba(99, 102, 241, 0.3) !important;
+        box-shadow: 0 8px 15px rgba(201, 42, 42, 0.3) !important;
     }
 
     /* State Kosong */

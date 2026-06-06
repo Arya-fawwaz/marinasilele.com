@@ -6,25 +6,25 @@
 <div class="container-fluid p-0">
     
     <div class="welcome-banner p-4 p-md-5 rounded-4 mb-4 shadow-sm animate-fade-in position-relative overflow-hidden" style="animation-delay: 0.1s;">
-        <div class="position-absolute top-0 end-0 h-100 w-50" style="background: radial-gradient(circle, rgba(255,184,0,0.15) 0%, transparent 70%); transform: translate(20%, -20%);"></div>
-        <div class="position-absolute bottom-0 start-0 h-100 w-50" style="background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);"></div>
+        <div class="position-absolute top-0 end-0 h-100 w-50" style="background: radial-gradient(circle, rgba(201,42,42,0.06) 0%, transparent 70%); transform: translate(20%, -20%);"></div>
+        <div class="position-absolute bottom-0 start-0 h-100 w-50" style="background: radial-gradient(circle, rgba(230,126,34,0.04) 0%, transparent 70%);"></div>
         
         <div class="row align-items-center position-relative z-1">
             <div class="col-md-8">
-                <span class="badge bg-white text-danger fw-bold mb-3 px-3 py-2 rounded-pill shadow-sm" style="letter-spacing: 1px; font-size: 0.75rem;">
+                <span class="badge fw-bold mb-3 px-3 py-2 rounded-pill shadow-sm" style="letter-spacing: 1px; font-size: 0.75rem; background-color: rgba(201, 42, 42, 0.08); color: #c92a2a; border: 1px solid rgba(201, 42, 42, 0.15);">
                     <i class="fas fa-bolt text-warning me-1"></i> RINGKASAN HARI INI
                 </span>
-                <h2 class="fw-black text-white mb-2" style="font-size: 2.2rem; letter-spacing: -0.5px;">Selamat datang, {{ Auth::user()->name }}! 👋</h2>
-                <p class="text-white-50 mb-0" style="font-size: 1.05rem;">Pantau performa penjualan, ketersediaan stok, dan manajemen toko Anda secara real-time.</p>
+                <h2 class="fw-black text-dark mb-2" style="font-size: 2.2rem; letter-spacing: -0.5px;">Selamat datang, {{ Auth::user()->name }}! 👋</h2>
+                <p class="text-muted mb-0" style="font-size: 1.05rem;">Pantau performa penjualan, ketersediaan stok, dan manajemen toko Anda secara real-time.</p>
             </div>
             <div class="col-md-4 text-md-end d-none d-md-block">
-                <div class="d-inline-flex align-items-center bg-white bg-opacity-10 backdrop-blur rounded-pill px-4 py-2 border border-light border-opacity-25">
-                    <div class="bg-warning rounded-circle me-3 d-flex justify-content-center align-items-center" style="width: 35px; height: 35px;">
-                        <i class="far fa-calendar-alt text-dark fs-6"></i>
+                <div class="d-inline-flex align-items-center bg-white shadow-sm rounded-pill px-4 py-2 border border-light">
+                    <div class="bg-warning-soft rounded-circle me-3 d-flex justify-content-center align-items-center" style="width: 35px; height: 35px; background-color: rgba(245, 158, 11, 0.1);">
+                        <i class="far fa-calendar-alt text-warning fs-6"></i>
                     </div>
                     <div class="text-start">
-                        <p class="text-white fw-bold mb-0 lh-1" style="font-size: 0.9rem;">{{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
-                        <small class="text-white-50" style="font-size: 0.75rem;">{{ \Carbon\Carbon::now()->translatedFormat('l') }}</small>
+                        <p class="text-dark fw-bold mb-0 lh-1" style="font-size: 0.9rem;">{{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+                        <small class="text-muted" style="font-size: 0.75rem;">{{ \Carbon\Carbon::now()->translatedFormat('l') }}</small>
                     </div>
                 </div>
             </div>
@@ -184,9 +184,9 @@
 
     /* Welcome Banner Premium */
     .welcome-banner {
-        background: linear-gradient(135deg, #090d16 0%, #1c1917 40%, #311042 100%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: var(--shadow-lg) !important;
+        background: linear-gradient(135deg, #fff5f5 0%, #fffbf7 100%);
+        border: 1px solid rgba(201, 42, 42, 0.12);
+        box-shadow: var(--shadow-sm) !important;
     }
     
     .backdrop-blur {
@@ -203,12 +203,12 @@
     }
     .stat-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15) !important;
-        border-color: rgba(99, 102, 241, 0.3) !important;
+        box-shadow: 0 10px 30px rgba(201, 42, 42, 0.08) !important;
+        border-color: rgba(201, 42, 42, 0.2) !important;
     }
 
     /* Background Soft Warna Tonalitas Elegan */
-    .bg-primary-soft { background-color: rgba(99, 102, 241, 0.1) !important; }
+    .bg-primary-soft { background-color: rgba(201, 42, 42, 0.08) !important; }
     .bg-success-soft { background-color: rgba(16, 185, 129, 0.1) !important; }
     .bg-warning-soft { background-color: rgba(245, 158, 11, 0.1) !important; }
 
@@ -236,8 +236,8 @@
     }
     .action-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(99, 102, 241, 0.1) !important;
-        border-color: rgba(99, 102, 241, 0.3) !important;
+        box-shadow: 0 10px 20px rgba(201, 42, 42, 0.08) !important;
+        border-color: rgba(201, 42, 42, 0.2) !important;
     }
     .action-icon {
         width: 50px;
@@ -254,12 +254,12 @@
     }
 
     /* Kustomisasi Warna Spesifik */
-    .text-primary { color: #2563eb !important; }
+    .text-primary { color: #c92a2a !important; }
     .text-success { color: #10b981 !important; }
     .text-warning { color: #f59e0b !important; }
     
-    .btn-outline-primary { border-color: rgba(59, 130, 246, 0.3) !important; color: #2563eb !important; background: transparent !important; }
-    .btn-outline-primary:hover { background: #2563eb !important; border-color: #2563eb !important; color: #fff !important; }
+    .btn-outline-primary { border-color: rgba(201, 42, 42, 0.3) !important; color: #c92a2a !important; background: transparent !important; }
+    .btn-outline-primary:hover { background: #c92a2a !important; border-color: #c92a2a !important; color: #fff !important; }
     
     .btn-outline-success { border-color: rgba(16, 185, 129, 0.3) !important; color: #10b981 !important; background: transparent !important; }
     .btn-outline-success:hover { background: #10b981 !important; border-color: #10b981 !important; color: white !important;}

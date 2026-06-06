@@ -69,7 +69,7 @@
                             </td>
                             
                             <td class="py-3 border-bottom border-light text-center">
-                                <a href="{{ route('admin.orders.show', $row->id) }}" class="btn btn-sm text-white rounded-pill px-4 fw-bold shadow-sm" style="background-color: #A81C1C;">
+                                <a href="{{ route('admin.orders.show', $row->id) }}" class="btn btn-sm btn-primary rounded-pill px-4 fw-bold shadow-sm">
                                     Detail <i class="fas fa-arrow-right ms-1"></i>
                                 </a>
                             </td>
@@ -139,7 +139,8 @@
 
     .table tbody tr:hover {
         transform: translateY(-3px) scale(1.002);
-        box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15) !important;
+        box-shadow: 0 10px 20px rgba(201, 42, 42, 0.08) !important;
+        border-color: rgba(201, 42, 42, 0.2) !important;
     }
 
     @keyframes pulse { 

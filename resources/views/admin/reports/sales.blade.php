@@ -232,7 +232,8 @@
 
     .table tbody tr:hover {
         transform: translateY(-3px) scale(1.002);
-        box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15) !important;
+        box-shadow: 0 10px 20px rgba(201, 42, 42, 0.08) !important;
+        border-color: rgba(201, 42, 42, 0.2) !important;
     }
 
     /* ANIMASI MASUK */

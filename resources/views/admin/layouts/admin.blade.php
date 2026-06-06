@@ -13,25 +13,25 @@
 
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            --secondary: #94a3b8;
+            --primary: #c92a2a;
+            --primary-gradient: linear-gradient(135deg, #c92a2a 0%, #e67e22 100%);
+            --secondary: #64748b;
             --success: #10b981;
             --warning: #f59e0b;
-            --danger: #f43f5e;
-            --dark-sidebar: #090d16;
-            --bg-admin: #0b0f19;
-            --card-bg: #111827;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --danger: #ef4444;
+            --dark-sidebar: #ffffff;
+            --bg-admin: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: rgba(226, 232, 240, 0.8);
             --radius-lg: 16px;
             --radius-md: 12px;
             --radius-sm: 8px;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
-            --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+            --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -46,12 +46,13 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Dark Mode helper overrides */
-        .text-dark { color: #f8fafc !important; }
-        .text-muted, .text-secondary { color: #94a3b8 !important; }
-        .bg-light { background-color: #1f2937 !important; color: #f8fafc !important; }
-        select option { background-color: #111827 !important; color: #f8fafc !important; }
-        .modal-content { background-color: #111827 !important; border: 1px solid var(--border-color) !important; color: #f8fafc !important; }
+        /* Light Theme defaults */
+        .text-dark { color: var(--text-main) !important; }
+        .text-muted, .text-secondary { color: var(--text-muted) !important; }
+        .text-primary { color: var(--primary) !important; }
+        .bg-light { background-color: #f1f5f9 !important; color: var(--text-main) !important; }
+        select option { background-color: #ffffff !important; color: var(--text-main) !important; }
+        .modal-content { background-color: #ffffff !important; border: 1px solid var(--border-color) !important; color: var(--text-main) !important; }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
@@ -62,11 +63,11 @@
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: #334155;
+            background: #cbd5e1;
             border-radius: 9999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
+            background: #94a3b8;
         }
 
         /* --- Sidebar Modern --- */
@@ -79,7 +80,7 @@
             background: var(--dark-sidebar);
             z-index: 1000;
             transition: var(--transition);
-            box-shadow: 4px 0 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 4px 0 25px rgba(0, 0, 0, 0.03);
             display: flex;
             flex-direction: column;
             border-right: 1px solid var(--border-color);
@@ -87,7 +88,7 @@
 
         .sidebar-brand {
             padding: 1.75rem 1.5rem;
-            color: #fff;
+            color: var(--text-main);
             font-weight: 800;
             font-size: 1.35rem;
             letter-spacing: 0.5px;
@@ -104,8 +105,8 @@
         }
 
         .sidebar-brand span {
-            color: #818cf8;
-            background: var(--primary-gradient);
+            color: #e67e22;
+            background: linear-gradient(135deg, #c92a2a 0%, #e67e22 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -120,7 +121,7 @@
         .sidebar-link {
             display: flex;
             align-items: center;
-            color: #64748b;
+            color: #475569;
             padding: 0.85rem 1.25rem;
             text-decoration: none;
             font-weight: 600;
@@ -135,20 +136,20 @@
             width: 28px;
             font-size: 1.15rem;
             transition: var(--transition);
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         .sidebar-link:hover {
-            background-color: rgba(255, 255, 255, 0.03);
-            color: #f8fafc;
-            border-color: rgba(255, 255, 255, 0.01);
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            border-color: rgba(0, 0, 0, 0.01);
             transform: translateX(3px);
         }
 
         .sidebar-link.active {
             background: var(--primary-gradient);
             color: #fff;
-            box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.5);
+            box-shadow: 0 8px 20px -6px rgba(201, 42, 42, 0.35);
             border-color: rgba(255, 255, 255, 0.1);
         }
 
@@ -159,7 +160,7 @@
         .sidebar-footer {
             padding: 1.25rem 1.5rem;
             border-top: 1px solid var(--border-color);
-            background: rgba(0, 0, 0, 0.2);
+            background: #f8fafc;
         }
 
         /* --- Main Content Area --- */
@@ -174,14 +175,14 @@
         /* --- Topbar Modern --- */
         .admin-topbar {
             height: 75px;
-            background-color: rgba(17, 24, 39, 0.8);
+            background-color: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
@@ -224,11 +225,11 @@
             background: var(--primary-gradient) !important;
             border: none !important;
             color: #fff !important;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 12px rgba(201, 42, 42, 0.2);
         }
         .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
-            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.45);
+            background: linear-gradient(135deg, #a81c1c 0%, #d35400 100%) !important;
+            box-shadow: 0 6px 16px rgba(201, 42, 42, 0.3);
             transform: translateY(-2px);
             color: #fff !important;
         }
@@ -261,23 +262,23 @@
 
         .btn-outline-secondary {
             border: 1px solid var(--border-color) !important;
-            background: transparent !important;
+            background: #ffffff !important;
             color: var(--text-main) !important;
         }
         .btn-outline-secondary:hover {
-            background: rgba(255, 255, 255, 0.05) !important;
-            border-color: rgba(255, 255, 255, 0.2) !important;
+            background: #f1f5f9 !important;
+            border-color: #cbd5e1 !important;
             transform: translateY(-2px);
             color: var(--text-main) !important;
         }
 
         .btn-light {
-            background: #1f2937 !important;
+            background: #f1f5f9 !important;
             border: 1px solid var(--border-color) !important;
             color: var(--text-main) !important;
         }
         .btn-light:hover {
-            background: #374151 !important;
+            background: #e2e8f0 !important;
             transform: translateY(-2px);
         }
 
@@ -288,15 +289,15 @@
             padding: 0.65rem 1rem !important;
             font-size: 0.95rem !important;
             color: var(--text-main) !important;
-            background-color: #1f2937 !important;
+            background-color: #ffffff !important;
             transition: var(--transition) !important;
         }
 
         .form-control:focus, .form-select:focus {
             border-color: var(--primary) !important;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2) !important;
+            box-shadow: 0 0 0 4px rgba(201, 42, 42, 0.12) !important;
             outline: 0 !important;
-            background-color: #111827 !important;
+            background-color: #ffffff !important;
         }
 
         .form-control-lg, .form-select-lg {
@@ -314,7 +315,7 @@
         /* Custom Modern Table */
         .table {
             --bs-table-bg: transparent !important;
-            --bs-table-hover-bg: #1f2937 !important;
+            --bs-table-hover-bg: #f8fafc !important;
             border-collapse: separate !important;
             border-spacing: 0 !important;
             width: 100% !important;
@@ -355,44 +356,44 @@
 
         /* Custom modern badges using translucent colors */
         .badge.bg-success {
-            background-color: rgba(16, 185, 129, 0.15) !important;
-            color: #10b981 !important;
-            border: 1px solid rgba(16, 185, 129, 0.25) !important;
-        }
-        .badge.bg-success-subtle {
             background-color: rgba(16, 185, 129, 0.1) !important;
-            color: #10b981 !important;
+            color: #059669 !important;
             border: 1px solid rgba(16, 185, 129, 0.2) !important;
         }
+        .badge.bg-success-subtle {
+            background-color: rgba(16, 185, 129, 0.08) !important;
+            color: #059669 !important;
+            border: 1px solid rgba(16, 185, 129, 0.15) !important;
+        }
         .badge.bg-warning {
-            background-color: rgba(245, 158, 11, 0.15) !important;
-            color: #f59e0b !important;
-            border: 1px solid rgba(245, 158, 11, 0.25) !important;
+            background-color: rgba(245, 158, 11, 0.1) !important;
+            color: #d97706 !important;
+            border: 1px solid rgba(245, 158, 11, 0.2) !important;
         }
         .badge.bg-danger {
-            background-color: rgba(239, 68, 68, 0.15) !important;
-            color: #f43f5e !important;
-            border: 1px solid rgba(239, 68, 68, 0.25) !important;
-        }
-        .badge.bg-danger-subtle {
             background-color: rgba(239, 68, 68, 0.1) !important;
-            color: #f43f5e !important;
+            color: #dc2626 !important;
             border: 1px solid rgba(239, 68, 68, 0.2) !important;
         }
+        .badge.bg-danger-subtle {
+            background-color: rgba(239, 68, 68, 0.08) !important;
+            color: #dc2626 !important;
+            border: 1px solid rgba(239, 68, 68, 0.15) !important;
+        }
         .badge.bg-primary {
-            background-color: rgba(99, 102, 241, 0.15) !important;
-            color: #818cf8 !important;
-            border: 1px solid rgba(99, 102, 241, 0.25) !important;
+            background-color: rgba(13, 110, 253, 0.1) !important;
+            color: #0b5ed7 !important;
+            border: 1px solid rgba(13, 110, 253, 0.2) !important;
         }
         .badge.bg-info {
-            background-color: rgba(59, 130, 246, 0.15) !important;
-            color: #60a5fa !important;
-            border: 1px solid rgba(59, 130, 246, 0.25) !important;
+            background-color: rgba(59, 130, 246, 0.1) !important;
+            color: #2563eb !important;
+            border: 1px solid rgba(59, 130, 246, 0.2) !important;
         }
         .badge.bg-secondary {
-            background-color: rgba(148, 163, 184, 0.15) !important;
-            color: #94a3b8 !important;
-            border: 1px solid rgba(148, 163, 184, 0.25) !important;
+            background-color: rgba(100, 116, 139, 0.1) !important;
+            color: #475569 !important;
+            border: 1px solid rgba(100, 116, 139, 0.2) !important;
         }
 
         /* Overlay */
@@ -453,11 +454,11 @@
     <aside class="admin-sidebar">
         <div class="sidebar-brand">
             <div>
-                <i class="fas fa-fish me-2" style="color: #6366f1;"></i>
+                <i class="fas fa-fish me-2" style="color: #c92a2a;"></i>
                 Marinasi<span>Admin</span>
             </div>
             <button class="btn text-white d-lg-none p-0 border-0" id="sidebarClose" type="button">
-                <i class="fas fa-times fs-5"></i>
+                <i class="fas fa-times fs-5 text-dark"></i>
             </button>
         </div>
         
@@ -500,18 +501,18 @@
         <header class="admin-topbar">
             <div class="d-flex align-items-center gap-2">
                 <button class="btn btn-light d-lg-none shadow-none border-0 p-2" id="sidebarToggle" type="button" style="background: transparent !important;">
-                    <i class="fas fa-bars fs-4 text-white"></i>
+                    <i class="fas fa-bars fs-4 text-dark"></i>
                 </button>
-                <h5 class="mb-0 fw-bold text-white">@yield('title')</h5>
+                <h5 class="mb-0 fw-bold text-dark">@yield('title')</h5>
             </div>
             <div class="d-flex align-items-center gap-3">
                 <div class="text-end d-none d-md-block">
-                    <p class="mb-0 fw-bold text-white" style="font-size: 0.9rem;">{{ Auth::user()->name }}</p>
+                    <p class="mb-0 fw-bold text-dark" style="font-size: 0.9rem;">{{ Auth::user()->name }}</p>
                     <p class="mb-0 text-muted" style="font-size: 0.75rem;">Administrator</p>
                 </div>
                 
                 {{-- 👑 PERBAIKAN FITUR FOTO PROFIL ADMIN REAL-TIME 👑 --}}
-                <div class="rounded-circle text-white d-flex align-items-center justify-content-center fw-bold shadow-sm overflow-hidden" style="width: 40px; height: 40px; background-color: #6366f1;">
+                <div class="rounded-circle text-white d-flex align-items-center justify-content-center fw-bold shadow-sm overflow-hidden" style="width: 40px; height: 40px; background-color: #c92a2a;">
                     @if(Auth::user()->avatar)
                         <img src="{{ asset(Auth::user()->avatar) }}" alt="Foto Admin" style="width: 100%; height: 100%; object-fit: cover;">
                     @else
