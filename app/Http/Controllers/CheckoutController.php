@@ -23,7 +23,14 @@ class CheckoutController extends Controller
 
     public function process(Request $request)
     {
-        $request->validate(['address' => 'required|string']);
+        $request->validate([
+            'address' => 'required|string',
+            'shipping_fee' => 'nullable|integer',
+            'distance' => 'nullable|numeric',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+        ]);
+        
         $user = Auth::user();
         $carts = Cart::with('product')->where('user_id', $user->id)->get();
 
@@ -35,6 +42,8 @@ class CheckoutController extends Controller
         }
 
         $totalPrice = $carts->sum(function($cart) { return ($cart->product->price ?? 0) * $cart->quantity; });
+        $shippingFee = intval($request->input('shipping_fee', 0));
+        $totalAmount = $totalPrice + $shippingFee;
 
         $orderNumber = 'ORD-' . time() . '-' . rand(100, 999);
         $order = Order::create([
@@ -42,7 +51,11 @@ class CheckoutController extends Controller
             'order_number'     => $orderNumber,
             'shipping_address' => $request->address, 
             'total_price'      => $totalPrice,       
-            'total_amount'     => $totalPrice,       
+            'total_amount'     => $totalAmount,       
+            'shipping_fee'     => $shippingFee,
+            'distance'         => $request->input('distance'),
+            'latitude'         => $request->input('latitude'),
+            'longitude'        => $request->input('longitude'),
             'status'           => 'pending',
         ]);
 

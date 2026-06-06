@@ -32,6 +32,11 @@
                     <h5 class="fw-bold text-dark mb-1">{{ auth()->user()->name }}</h5>
                     <p class="text-muted small mb-2"><i class="far fa-envelope me-1"></i> {{ auth()->user()->email }}</p>
                     <p class="text-secondary small mb-0"><i class="fas fa-map-marker-alt me-1 text-danger"></i> {{ $order->shipping_address ?? $order->address }}</p>
+                    @if($order->latitude && $order->longitude)
+                        <div class="mt-3">
+                            <div id="map-show" style="height: 180px; width: 100%; max-width: 400px;" class="rounded-3 border shadow-sm"></div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="col-md-6 text-md-end">
@@ -100,7 +105,22 @@
 
             <div class="row justify-content-end">
                 <div class="col-md-5">
-                    <div class="d-flex justify-content-between align-items-center bg-light p-4 rounded-4 border">
+                    <div class="d-flex justify-content-between mb-2 small text-muted">
+                        <span>Total Harga Barang:</span>
+                        <span class="fw-semibold text-dark">Rp {{ number_format($order->total_price ?? ($order->total_amount - $order->shipping_fee), 0, ',', '.') }}</span>
+                    </div>
+                    @if($order->shipping_fee > 0)
+                    <div class="d-flex justify-content-between mb-2 small text-muted">
+                        <span>Ongkos Kirim ({{ $order->distance }} km):</span>
+                        <span class="fw-semibold text-dark">Rp {{ number_format($order->shipping_fee, 0, ',', '.') }}</span>
+                    </div>
+                    @else
+                    <div class="d-flex justify-content-between mb-2 small text-muted">
+                        <span>Ongkos Kirim:</span>
+                        <span class="text-success fw-bold">Gratis / Dine-in</span>
+                    </div>
+                    @endif
+                    <div class="d-flex justify-content-between align-items-center bg-light p-4 rounded-4 border mt-2">
                         <span class="fw-bold text-muted text-uppercase small" style="letter-spacing: 0.5px;">Total Pembayaran</span>
                         <span class="fw-black text-danger fs-3" style="font-weight: 900;">Rp {{ number_format($order->total_amount ?? $order->total_price, 0, ',', '.') }}</span>
                     </div>
@@ -122,4 +142,39 @@
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     .animate-fade-in { animation: fadeInUp 0.4s ease forwards; }
 </style>
+
+@if($order->latitude && $order->longitude)
+@push('styles')
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+@endpush
+
+@push('scripts')
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const lat = {{ $order->latitude }};
+        const lng = {{ $order->longitude }};
+        
+        const map = L.map('map-show', {
+            zoomControl: false,
+            attributionControl: false
+        }).setView([lat, lng], 14);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        const customerIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            shadowSize: [41, 41]
+        });
+
+        L.marker([lat, lng], { icon: customerIcon }).addTo(map)
+            .bindPopup('Lokasi Pengiriman Anda')
+            .openPopup();
+    });
+</script>
+@endpush
+@endif
 @endsection

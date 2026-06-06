@@ -55,6 +55,17 @@
                         <div class="bg-light p-3 rounded-3 text-dark fw-medium fs-6 border border-light">
                             {{ $order->shipping_address ?? $order->address ?? 'Tidak ada alamat.' }}
                         </div>
+                        @if($order->latitude && $order->longitude)
+                            <div class="mt-3">
+                                <small class="text-muted text-uppercase fw-bold d-block mb-2" style="font-size: 0.7rem; letter-spacing: 0.5px;"><i class="fas fa-map text-danger me-1"></i> Peta Lokasi Kurir (Koordinat: {{ $order->latitude }}, {{ $order->longitude }})</small>
+                                <div id="map-admin" style="height: 350px; width: 100%;" class="rounded-4 border shadow-sm"></div>
+                                <div class="mt-2 d-flex gap-2">
+                                    <a href="https://www.google.com/maps/search/?api=1&query={{ $order->latitude }},{{ $order->longitude }}" target="_blank" class="btn btn-sm btn-outline-danger rounded-pill px-3 fw-semibold">
+                                        <i class="fas fa-external-link-alt me-1"></i> Buka di Google Maps
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -105,7 +116,22 @@
 
                     <div class="row justify-content-end mt-4">
                         <div class="col-md-6">
-                            <div class="d-flex justify-content-between align-items-center bg-light p-4 rounded-4 border">
+                            <div class="d-flex justify-content-between mb-2 small text-muted">
+                                <span>Total Harga Barang:</span>
+                                <span class="fw-semibold text-dark">Rp {{ number_format($order->total_price ?? ($order->total_amount - ($order->shipping_fee ?? 0)), 0, ',', '.') }}</span>
+                            </div>
+                            @if(($order->shipping_fee ?? 0) > 0)
+                            <div class="d-flex justify-content-between mb-2 small text-muted">
+                                <span>Ongkos Kirim ({{ $order->distance }} km):</span>
+                                <span class="fw-semibold text-dark">Rp {{ number_format($order->shipping_fee, 0, ',', '.') }}</span>
+                            </div>
+                            @else
+                            <div class="d-flex justify-content-between mb-2 small text-muted">
+                                <span>Ongkos Kirim:</span>
+                                <span class="text-success fw-bold">Gratis / Dine-in</span>
+                            </div>
+                            @endif
+                            <div class="d-flex justify-content-between align-items-center bg-light p-4 rounded-4 border mt-2">
                                 <span class="fw-bold text-muted text-uppercase small" style="letter-spacing: 0.5px;">Total Tagihan</span>
                                 <span class="fw-black text-danger fs-3" style="font-weight: 900;">Rp {{ number_format($order->total_amount ?? $order->total_price, 0, ',', '.') }}</span>
                             </div>
@@ -201,3 +227,63 @@
     select:focus { border-color: #A81C1C !important; box-shadow: 0 0 0 0.25rem rgba(168, 28, 28, 0.15) !important; }
 </style>
 @endpush
+
+@if($order->latitude && $order->longitude)
+@push('styles')
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+@endpush
+
+@push('scripts')
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const lat = {{ $order->latitude }};
+        const lng = {{ $order->longitude }};
+        
+        const map = L.map('map-admin', {
+            zoomControl: true,
+            attributionControl: true
+        }).setView([lat, lng], 14);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        const customerIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            shadowSize: [41, 41]
+        });
+
+        // Store location (fixed point: Mega Kuningan, Jakarta: -6.229728, 106.829898)
+        const storeLat = -6.229728;
+        const storeLng = 106.829898;
+        const storeIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            shadowSize: [41, 41]
+        });
+
+        // Add Store Marker
+        L.marker([storeLat, storeLng], { icon: storeIcon }).addTo(map)
+            .bindPopup('<b>Toko Marina Si Lele</b><br>Mega Kuningan, Jakarta');
+
+        // Add Customer Marker
+        L.marker([lat, lng], { icon: customerIcon }).addTo(map)
+            .bindPopup('<b>Lokasi Pengiriman Pelanggan</b><br>Jarak: {{ $order->distance }} km')
+            .openPopup();
+
+        // Fit map bounds to show both store and delivery location nicely
+        const group = new L.featureGroup([
+            L.marker([storeLat, storeLng]),
+            L.marker([lat, lng])
+        ]);
+        map.fitBounds(group.getBounds().pad(0.2));
+    });
+</script>
+@endpush
+@endif
