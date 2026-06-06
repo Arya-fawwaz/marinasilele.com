@@ -200,9 +200,9 @@
 @push('scripts')
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
-    // Koordinat Toko Marinasi Lele (Mega Kuningan, Jakarta)
-    const STORE_LAT = -6.229728;
-    const STORE_LNG = 106.829898;
+    // Koordinat Toko Marinasi Lele (Metland Cibitung)
+    const STORE_LAT = -6.2494885;
+    const STORE_LNG = 107.1096282;
     
     let map, marker, routeLine = null;
     let currentLat = null;

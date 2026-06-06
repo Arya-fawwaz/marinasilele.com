@@ -84,7 +84,7 @@ class CheckoutController extends Controller
         $params = [
             'transaction_details' => [
                 'order_id'     => $order->order_number . '-' . time(), // Suffix unik agar Midtrans mengizinkan pembayaran ulang jika gagal
-                'gross_amount' => $order->total_price ?? $order->total_amount,
+                'gross_amount' => $order->total_amount ?? $order->total_price,
             ],
             'customer_details' => [
                 'first_name' => $user->name,

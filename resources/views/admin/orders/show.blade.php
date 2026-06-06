@@ -257,9 +257,9 @@
             shadowSize: [41, 41]
         });
 
-        // Store location (fixed point: Mega Kuningan, Jakarta: -6.229728, 106.829898)
-        const storeLat = -6.229728;
-        const storeLng = 106.829898;
+        // Store location (fixed point: Metland Cibitung: -6.2494885, 107.1096282)
+        const storeLat = -6.2494885;
+        const storeLng = 107.1096282;
         const storeIcon = L.icon({
             iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
             shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -270,7 +270,7 @@
 
         // Add Store Marker
         L.marker([storeLat, storeLng], { icon: storeIcon }).addTo(map)
-            .bindPopup('<b>Toko Marina Si Lele</b><br>Mega Kuningan, Jakarta');
+            .bindPopup('<b>Toko Marina Si Lele</b><br>Metland Cibitung');
 
         // Add Customer Marker
         L.marker([lat, lng], { icon: customerIcon }).addTo(map)
