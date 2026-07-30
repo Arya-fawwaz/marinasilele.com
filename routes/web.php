@@ -27,6 +27,31 @@ require __DIR__.'/auth.php';
 // ==================== NOTIFIKASI MIDTRANS (Wajib di Luar Auth) ====================
 Route::post('/midtrans/notification', [CheckoutController::class, 'handleNotification'])->name('midtrans.notification');
 
+// ==================== KEEP-ALIVE SUPABASE DATABASE ====================
+Route::get('/cron/keep-alive', function (\Illuminate\Http\Request $request) {
+    $cronSecret = env('CRON_SECRET');
+    if ($cronSecret) {
+        $authHeader = $request->header('Authorization');
+        if (!$authHeader || $authHeader !== 'Bearer ' . $cronSecret) {
+            return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
+        }
+    }
+    
+    try {
+        \Illuminate\Support\Facades\DB::select('SELECT 1');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Database connection is active.',
+            'timestamp' => now()->toIso8601String(),
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+        ], 500);
+    }
+});
+
 // ==================== USER AREA ====================
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () { return redirect()->route('home'); })->name('dashboard');
